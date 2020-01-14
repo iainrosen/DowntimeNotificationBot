@@ -1,17 +1,14 @@
-print "Starting..."
 import os
 import time
 import telepot
 import sqlite3
 import msgprocess
-print "Setting Up Database..."
 conn = sqlite3.connect("/usr/bin/downtime/db/botconfig.db")
 c = conn.cursor()
 c.execute("SELECT * FROM api")
 token = c.fetchone()
 token = str(token[0])
 bot = telepot.Bot(token)
-print "Ready"
 lastMsg = 1
 def parseMsg(msg):
     parse = message[0]
