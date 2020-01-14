@@ -4,15 +4,43 @@ if [[ $EUID -ne 0 ]]; then
    echo "Install failed. Root permissions required"
    exit 1
 fi
+echo "Installing Required Packages..."
+apt install python3-pip -y
+apt install python3 -y
+pip3 install telepot
+pip3 install sqlite3
+
+if [ -e /usr/bin/downtime/db ]; then
+  echo "Backing up configuration files..."
+  mkdir /tmp/downtime
+  cp -R /usr/bin/downtime/db/* /tmp/downtime
+  backupConfig=True
+else
+  echo "Configuration files not detected."
+  echo "WARNING! The script has not detected a Downtime installation on your system. If this is NOT TRUE, press Ctrl+C NOW"
+  sleep 5
+fi
+echo "Continuing Installation..."
 rm -rf /usr/bin/downtime/
+rm -rf /usr/bin/downtime-cli
 mkdir /usr/bin/downtime/
 mkdir /usr/bin/downtime/db
 mkdir /usr/bin/downtime/logs
 cp -R install/* /usr/bin/downtime/
+cp downtime-cli /usr/bin/
+chmod +x /usr/bin/downtime-cli
+chmod +x /usr/bin/downtime/*
+if [ $backupConfig==True ]; then
+  echo "Copying old config files to new installation..."
+  cp -R /tmp/downtime/* /usr/bin/downtime/db/
+  echo "Upgrade Complete"
+  exit
+fi
 echo "Install Complete"
-echo "Enter your Bot Token: "
+echo "Enter your Bot Token:"
 read BotToken
-configInit=$(python3 /usr/bin/downtime/setup.py init $BotToken)
+python3 /usr/bin/downtime/setup.py init $BotToken
+configInit=$(python3 /usr/bin/downtime/setup.py check)
 if [ configInit == 0 ]; then
   echo "Configuration Complete."
 else
