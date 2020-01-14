@@ -19,10 +19,10 @@ def init(key):
     return 0
 try:
     if sys.argv[1] == "init":
-        init(sys.agrv[2])
+        init(sys.argv[2])
     elif sys.argv[1] == "check":
         checkconf()
     else:
         print("Argument missing or not recognized.")
 except(IndexError):
-    raise Exception("Argument missing. Required 1.")
+    raise Exception("Required argument missing.")
