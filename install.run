@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Starting DowntimeBot Installation..."
+if [[ $EUID -ne 0 ]]; then
+   echo "Install failed. Root permissions required"
+   exit 1
+fi
+rm -rf /usr/bin/downtime/
+mkdir /usr/bin/downtime/
+mkdir /usr/bin/downtime/db
+mkdir /usr/bin/downtime/logs
+cp -R BotComm/* /usr/bin/downtime/
+echo "Install Complete"
