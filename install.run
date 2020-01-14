@@ -8,7 +8,6 @@ echo "Installing Required Packages..."
 apt install python3-pip -y
 apt install python3 -y
 pip3 install telepot
-pip3 install sqlite3
 
 if [ -e /usr/bin/downtime/db ]; then
   echo "Backing up configuration files..."
