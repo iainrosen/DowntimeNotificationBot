@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+import os
+os.chdir("/usr/bin/downtime/")
+import dbget
+def adduser(userid):
+    print("Creating new user...")
+    if dbget.writeval(userid, "authusers") == 0:
+        print("User Added.")
+    else:
+        print("Failed! Have you setup Downtime?")
