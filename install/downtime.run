@@ -2,7 +2,7 @@
 #Downtime Bot Runtime
 #Check DB is ready
 configResult=$(python3 /usr/bin/downtime/setup.py check)
-if [ configResult == 1 ] then
+if [ configResult == 1 ]; then
   echo "Downtime is not initialized. Use setup.py init [token]."
   exit #Downtime not configured
 fi
