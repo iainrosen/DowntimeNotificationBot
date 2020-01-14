@@ -13,6 +13,8 @@ def init(key):
     c = conn.cursor()
     c.execute('''CREATE TABLE api
     (apikey text)''')
+    c.execute('''CREATE TABLE authusers
+    (authusers text)''')
     insertCommand = "INSERT INTO api VALUES ('" + key + "')"
     c.execute(insertCommand)
     conn.commit()
