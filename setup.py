@@ -17,9 +17,12 @@ def init(key):
     c.execute(insertCommand)
     conn.commit()
     return 0
-if sys.argv[1] == "init":
-    init(sys.agrv[2])
-elif sys.argv[1] == "check":
-    checkconf()
-else:
-    print("Argument missing or not recognized.")
+try:
+    if sys.argv[1] == "init":
+        init(sys.agrv[2])
+    elif sys.argv[1] == "check":
+        checkconf()
+    else:
+        print("Argument missing or not recognized.")
+except(IndexError):
+    raise Exception("Argument missing. Required 1.")
