@@ -32,6 +32,7 @@ chmod +x /usr/bin/downtime/*
 if [ $backupConfig==True ]; then
   echo "Copying old config files to new installation..."
   cp -R /tmp/downtime/* /usr/bin/downtime/db/
+  rm -rf /tmp/downtime/
   echo "Upgrade Complete"
   exit
 fi
