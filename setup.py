@@ -20,6 +20,6 @@ def init(key):
 if sys.argv[1] == "init":
     init(sys.agrv[2])
 elif sys.argv[1] == "check":
-    check()
+    checkconf()
 else:
     print("Argument missing or not recognized.")
