@@ -1,5 +1,8 @@
 #!/bin/bash
 #Downtime Bot Runtime
 #Check DB is ready
-python3 /usr/bin/downtime/setup.py check
+configResult=$(python3 /usr/bin/downtime/setup.py check)
+if [ configResult == 1 ] then
+  exit #Downtime not configured
+fi
 python3 /usr/bin/downtime/downtimebot.py &
