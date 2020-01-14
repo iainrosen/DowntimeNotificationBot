@@ -3,11 +3,8 @@ import time
 import telepot
 import sqlite3
 import msgprocess
-conn = sqlite3.connect("/usr/bin/downtime/db/botconfig.db")
-c = conn.cursor()
-c.execute("SELECT * FROM api")
-token = c.fetchone()
-token = str(token[0])
+import dbget
+token = dbget.readval("api", "*")
 bot = telepot.Bot(token)
 lastMsg = 1
 def parseMsg(msg):

@@ -9,11 +9,7 @@ starttext = '''Welcome to Downtime!
 Before you start, we need to register you with a new server. To do this, add your user id to the config file.
 You can check your userid with /whoami'''
 def sendmsg(userid, message):
-    conn = sqlite3.connect("/usr/local/downtime/db/botconfig.db")
-    c = conn.cursor()
-    c.execute("SELECT * FROM api")
-    token = c.fetchone()
-    token = str(token[0])
+    dbget.readval("api", "*")
     bot = telepot.Bot(token)
     bot.sendMessage(userid, message)
 def process(usrid, text):
