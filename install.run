@@ -8,5 +8,13 @@ rm -rf /usr/bin/downtime/
 mkdir /usr/bin/downtime/
 mkdir /usr/bin/downtime/db
 mkdir /usr/bin/downtime/logs
-cp -R BotComm/* /usr/bin/downtime/
+cp -R install/* /usr/bin/downtime/
 echo "Install Complete"
+echo "Enter your Bot Token: "
+read BotToken
+configInit=$(python3 /usr/bin/downtime/setup.py init $BotToken)
+if [ configInit == 0 ]; then
+  echo "Configuration Complete."
+else
+  echo "Configuration Failed."
+fi
