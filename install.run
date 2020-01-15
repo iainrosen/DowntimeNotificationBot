@@ -40,7 +40,7 @@ echo "Enter your Bot Token:"
 read BotToken
 python3 /usr/bin/downtime/setup.py init $BotToken
 configInit=$(python3 /usr/bin/downtime/setup.py check)
-if [ configInit == 0 ]; then
+if [ configInit == "0" ]; then
   echo "Configuration Complete."
 else
   echo "Configuration Failed."
