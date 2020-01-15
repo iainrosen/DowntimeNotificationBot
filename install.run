@@ -20,6 +20,7 @@ else
 fi
 echo "Continuing Installation..."
 rm -rf /usr/bin/downtime/
+rm -rf /usr/bin/downtime-cli
 mkdir /usr/bin/downtime/
 mkdir /usr/bin/downtime/db
 mkdir /usr/bin/downtime/logs
@@ -27,6 +28,7 @@ cp -R install/* /usr/bin/downtime/
 mv /usr/bin/downtime/downtime.service /etc/systemd/system/
 cp downtime-cli /usr/bin/
 chmod +x /usr/bin/downtime/*
+chmod +x /usr/bin/downtime-cli
 if [ -e /tmp/downtime ]; then
   echo "Copying old config files to new installation..."
   cp -R /tmp/downtime/* /usr/bin/downtime/db/
