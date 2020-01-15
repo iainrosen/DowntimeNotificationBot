@@ -6,5 +6,5 @@ if [ $configResult == "1" ]; then
   echo "Downtime is not initialized. Use setup.py init [token]."
   exit #Downtime not configured
 fi
-python3 /usr/bin/downtime/downtimebot.py
+python3 /usr/bin/downtime/downtimebot.py &
 python3 /usr/bin/downtime/watchbot.py
