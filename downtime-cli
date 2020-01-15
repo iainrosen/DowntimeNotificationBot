@@ -9,6 +9,8 @@ def adduser(userid):
         print("User Added.")
     else:
         print("Failed! Have you setup Downtime?")
+def run():
+    os.system("systemctl start downtime")
 try:
     arg1 = sys.argv[1]
     arg2 = sys.argv[2]
@@ -16,5 +18,7 @@ except:
     print("[ERROR] Downtime-CLI: Required 2 Arguments, didn't recieve enough.")
 if arg1 == "-n" or arg1 == "--new-user":
     adduser(arg2)
+elif arg1 == "-r" or arg1 == "--run":
+    run()
 else:
     print("[ERROR] Downtime-CLI: Argument not Recognized.")
