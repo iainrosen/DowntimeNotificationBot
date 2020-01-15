@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+import os
+import sys
+sys.path.append("/usr/bin/downtime/")
+import dbget
+def register():
+    print("Ready to Register.")
+    tcyc = 0
+    while tcyc != 300:
+        os.system("touch /tmp/registration.downtime.lock")
+        if os.path.exists("/tmp/registration.downtime.lock") != True:
+            print("Registration Complete.")
+            exit()
+        time.sleep(0.1)
+        tcyc = tcyc - 1
+    print("Registration Timeout.")
+    os.system("rm -rf /tmp/registration.downtime.lock")
+if sys.argv[1] == "register":
+    register()
