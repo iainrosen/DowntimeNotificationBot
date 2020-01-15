@@ -2,7 +2,7 @@
 Description=Downtime Notification Bot
 
 [Service]
-ExecStart=/usr/bin/downtime.run
+ExecStart=/usr/bin/downtime/downtime.run
 
 [Install]
 WantedBy=multi-user.target
