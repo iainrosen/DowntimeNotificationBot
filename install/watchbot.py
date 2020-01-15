@@ -3,14 +3,16 @@ import time
 import sys
 import outgoing
 import socket
+import subprocess
 hname = socket.gethostname()
 netfail = 0
 servicefail = 0
-servicewatch = [] #add the services you want to watch here
+servicewatch = ["downtime", "apache2"] #add the services you want to watch here
 
 while True:
     #check for server failures
-    for i in range(servicewatch):
-        checksvc = "systemctl is-active " + servicewatch[i]
-        if (os.Popen(checksvc).read) == "inactive":
+    for i in servicewatch:
+        checksvc = "systemctl is-active " + i
+        if (subprocess.getoutput(checksvc)) == "inactive":
             print("Service Failed!")
+    time.sleep(2)
