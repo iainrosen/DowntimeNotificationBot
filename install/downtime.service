@@ -1,0 +1,8 @@
+[Unit]
+Description=Downtime Notification Bot
+
+[Service]
+ExecStart=/usr/bin/downtime.run
+
+[Install]
+WantedBy=multi-user.target

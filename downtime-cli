@@ -11,6 +11,7 @@ def adduser(userid):
         print("Failed! Have you setup Downtime?")
 def run():
     os.system("systemctl start downtime")
+    exit()
 try:
     arg1 = sys.argv[1]
 except:
