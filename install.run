@@ -13,7 +13,6 @@ if [ -e /usr/bin/downtime/db ]; then
   echo "Backing up configuration files..."
   mkdir /tmp/downtime
   cp -R /usr/bin/downtime/db/* /tmp/downtime
-  backupConfig=True
 else
   echo "Configuration files not detected."
   echo "WARNING! The script has not detected a Downtime installation on your system. If this is NOT TRUE, press Ctrl+C NOW"
@@ -29,7 +28,7 @@ cp -R install/* /usr/bin/downtime/
 cp downtime-cli /usr/bin/
 chmod +x /usr/bin/downtime-cli
 chmod +x /usr/bin/downtime/*
-if [ $backupConfig==True ]; then
+if [ -e /tmp/downtime ]; then
   echo "Copying old config files to new installation..."
   cp -R /tmp/downtime/* /usr/bin/downtime/db/
   rm -rf /tmp/downtime/
