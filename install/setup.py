@@ -20,6 +20,7 @@ def init(key):
     insertCommand = "INSERT INTO api VALUES ('" + key + "')"
     c.execute(insertCommand)
     conn.commit()
+    print(0)
     return 0
 try:
     if sys.argv[1] == "init":
