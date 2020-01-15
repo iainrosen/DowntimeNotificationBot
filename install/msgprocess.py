@@ -13,11 +13,11 @@ def sendmsg(userid, message):
     bot = telepot.Bot(token)
     bot.sendMessage(userid, message)
 def process(usrid, text):
-    if text[0] == "/":
-        cmdType = True
+    if usrid == (dbget.readval("*", "authusers")):
+        priv = True
     else:
-        cmdType = False
-
+        priv = False
+    #nonpriv commands
     if text == "/start":
         sendmsg(usrid, starttext)
     elif text == "/help":
@@ -25,5 +25,9 @@ def process(usrid, text):
     elif text == "/whoami":
         msgSend = "Your User ID is: " + str(usrid)
         sendmsg(usrid, msgSend)
+    #priv commands
+    elif text == "/restart" and priv == True:
+       sendmsg(usrid, "Attempting to restart services...")
+       sendmsg(usrid, "Sorry this isn't implemented yet")
     else:
-        sendmsg(usrid, "I don't understand that command yet. Try /help if you're lost.")
+        sendmsg(usrid, "You might not be allowed to access that command yet.")
