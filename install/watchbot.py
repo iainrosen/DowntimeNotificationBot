@@ -4,6 +4,8 @@ import sys
 import outgoing
 import socket
 import subprocess
+import dbget
+userid = dbget.readval("*", "authusers")
 hname = socket.gethostname()
 netfail = 0
 servicefail = 0
@@ -15,7 +17,8 @@ while True:
         checksvc = "systemctl is-active " + i
         if (subprocess.getoutput(checksvc)) == "inactive" and i not in failed:
             failed.append(i)
-
+            msg = "Service: " + i + " on " + hname + " has failed!"
+            outgoing.sendmsg(userid, msg)
         else:
             failed.remove(i)
 
