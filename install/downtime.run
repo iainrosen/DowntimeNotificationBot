@@ -7,3 +7,4 @@ if [ $configResult == "1" ]; then
   exit #Downtime not configured
 fi
 python3 /usr/bin/downtime/downtimebot.py &
+python3 /usr/bin/downtime/watchbot.py &
