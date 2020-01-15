@@ -2,7 +2,10 @@
 Description=Downtime Notification Bot
 
 [Service]
+type=simple
+WorkingDirectory=/usr/bin/downtime/
 ExecStart=bash /usr/bin/downtime/downtime.run
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
