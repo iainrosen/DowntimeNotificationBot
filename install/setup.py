@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import sqlite3
+import dbget
 def checkconf():
     if os.path.exists("/usr/bin/downtime/db/botconfig.db") == True:
         print(0)
