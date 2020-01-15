@@ -4,7 +4,7 @@ import telepot
 import sqlite3
 import msgprocess
 import dbget
-token = dbget.readval("api", "*")
+token = dbget.readval("*", "api")
 bot = telepot.Bot(token)
 lastMsg = 1
 def parseMsg(msg):
