@@ -9,9 +9,13 @@ def adduser(userid):
         print("User Added.")
     else:
         print("Failed! Have you setup Downtime?")
+def banuser(userid):
+    print("Downtime must be reconfigured to remove the user.")
 def run():
     os.system("systemctl start downtime")
     exit()
+
+#single argument commands
 try:
     arg1 = sys.argv[1]
 except:
@@ -19,6 +23,8 @@ except:
     exit()
 if arg1 == "-r" or arg1 == "--run":
     run()
+
+#double arguments commands
 try:
     arg1 = sys.argv[1]
     arg2 = sys.argv[2]
@@ -27,5 +33,7 @@ except:
     exit()
 if arg1 == "-n" or arg1 == "--new-user":
     adduser(arg2)
+if arg1 == "-b" or arg1 == "--ban-user":
+    banuser(arg2)
 else:
     print("[ERROR] Downtime-CLI: Argument not Recognized.")

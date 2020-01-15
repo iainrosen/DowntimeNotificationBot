@@ -9,7 +9,7 @@ starttext = '''Welcome to Downtime!
 Before you start, we need to register you with a new server. To do this, add your user id to the config file.
 You can check your userid with /whoami'''
 def sendmsg(userid, message):
-    dbget.readval("*","api")
+    token = dbget.readval("*","api")
     bot = telepot.Bot(token)
     bot.sendMessage(userid, message)
 def process(usrid, text):
