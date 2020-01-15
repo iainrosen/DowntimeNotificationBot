@@ -4,8 +4,10 @@ import time
 import sqlite3
 def checkconf():
     if os.path.exists("/usr/bin/downtime/db/botconfig.db") == True:
+        print(0)
         return 0
     else:
+        print(1)
         return 1
 def init(key):
     os.system("rm -rf /usr/bin/downtime/db/*")
