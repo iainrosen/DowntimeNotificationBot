@@ -26,7 +26,6 @@ mkdir /usr/bin/downtime/logs
 cp -R install/* /usr/bin/downtime/
 mv /usr/bin/downtime/downtime.service /etc/systemd/system/
 cp downtime-cli /usr/bin/
-chmod +x /usr/bin/downtime-cli
 chmod +x /usr/bin/downtime/*
 if [ -e /tmp/downtime ]; then
   echo "Copying old config files to new installation..."
