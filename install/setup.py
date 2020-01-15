@@ -16,7 +16,7 @@ def init(key):
     c.execute('''CREATE TABLE api
     (apikey text)''')
     c.execute('''CREATE TABLE authusers
-    (authusers text)''')
+    (userid text)''')
     insertCommand = "INSERT INTO api VALUES ('" + key + "')"
     c.execute(insertCommand)
     conn.commit()
