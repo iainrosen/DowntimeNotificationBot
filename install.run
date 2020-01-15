@@ -37,10 +37,7 @@ fi
 echo "Install Complete"
 echo "Enter your Bot Token:"
 read BotToken
-echo "Enter your Telegram UserID:"
-read NewUser
 python3 /usr/bin/downtime/setup.py init $BotToken
-python3 /usr/bin/downtime/setup.py newuser $NewUser
 configInit=$(python3 /usr/bin/downtime/setup.py check)
 if [ $configInit == "0" ]; then
   echo "Configuration Complete."
