@@ -22,11 +22,20 @@ def init(key):
     conn.commit()
     print(0)
     return 0
+def newuser(userid):
+    if dbget.writeval(userid, "authusers") == 0:
+        print(0)
+        return 0
+    else:
+        print(1)
+        return 1
 try:
     if sys.argv[1] == "init":
         init(sys.argv[2])
     elif sys.argv[1] == "check":
         checkconf()
+    elif sys.argv[1] == "newuser":
+        newuser(sys.argv[2])
     else:
         print("Argument missing or not recognized.")
 except(IndexError):
