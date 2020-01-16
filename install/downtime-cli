@@ -7,10 +7,12 @@ sys.path.append("/usr/bin/downtime/")
 import dbget
 def register():
     print("Ready to Register.")
+    print("Hit [ENTER] when finished.")
+    os.system("touch /tmp/registration.downtime.lock")
     tcyc = 0
     while tcyc != 30:
         os.system("touch /tmp/registration.downtime.lock")
-        if os.path.exists("/tmp/registration.downtime.lock") != True:
+        if os.path.exists("/tmp/registration.downtime.lock") == False:
             print("Registration Complete.")
             exit()
         time.sleep(1)
