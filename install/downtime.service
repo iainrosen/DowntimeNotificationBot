@@ -2,7 +2,7 @@
 Description=Downtime Notification Bot
 
 [Service]
-type=simple
+Type=simple
 WorkingDirectory=/usr/bin/downtime/
 ExecStart=/usr/bin/downtime/downtime.run
 Restart=on-failure
