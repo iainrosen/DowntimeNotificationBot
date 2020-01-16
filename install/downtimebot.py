@@ -27,4 +27,4 @@ while True:
         time.sleep(1)
     except:
         #suicide script if misconfigured
-        print("Failed!")
+        os.system("systemctl restart downtime")
