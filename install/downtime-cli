@@ -24,5 +24,6 @@ if subprocess.getoutput("systemctl is-active downtime") != "active":
     time.sleep(5)
     if subprocess.getoutput("systemctl is-active downtime") != "active":
         print("Downtime Failed to Start!")
+        exit()
 if sys.argv[1] == "register":
     register()
