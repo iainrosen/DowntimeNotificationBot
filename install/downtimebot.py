@@ -17,10 +17,13 @@ def parseMsg(msg):
     text = messageDetails.get("text")
     return updateid, usrid, text
 while True:
-    message = bot.getUpdates(offset=lastMsg)
-    if message != []:
-        updateid, usrid, text = parseMsg(message)
-        lastMsg = updateid + 1
-        #process the message
-        msgprocess.process(usrid, text)
-    time.sleep(1)
+    try:
+        message = bot.getUpdates(offset=lastMsg)
+        if message != []:
+            updateid, usrid, text = parseMsg(message)
+            lastMsg = updateid + 1
+            #process the message
+            msgprocess.process(usrid, text)
+        time.sleep(1)
+    except:
+        os.system("pkill -f downtimebot.py")
