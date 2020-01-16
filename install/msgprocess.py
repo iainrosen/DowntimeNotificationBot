@@ -20,7 +20,7 @@ def process(usrid, text):
     #nonpriv commands
     if text == "/start":
         sendmsg(usrid, starttext)
-    if text == "/register":
+    elif text == "/register":
         if os.path.exists("/tmp/registration.downtime.lock") == True:
             cmd = "python3 /usr/bin/downtime/setup.py newuser " + usrid
             os.system(cmd)
