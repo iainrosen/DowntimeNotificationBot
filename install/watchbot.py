@@ -9,6 +9,7 @@ userid = dbget.readval("*", "authusers")
 hname = socket.gethostname()
 netfail = 0
 servicefail = 0
+
 servicewatch = ["downtime", "apache2"] #add the services you want to watch here
 failed = []
 while True:
