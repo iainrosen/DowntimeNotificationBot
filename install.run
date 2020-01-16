@@ -4,6 +4,7 @@ if [[ $EUID -ne 0 ]]; then
    echo "Install failed. Root permissions required"
    exit 1
 fi
+systemctl stop downtime
 echo "Installing Required Packages..."
 apt install python3-pip -y
 apt install python3 -y
