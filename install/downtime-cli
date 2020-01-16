@@ -18,11 +18,11 @@ def register():
     print("Registration Timeout.")
     os.system("rm -rf /tmp/registration.downtime.lock")
 #check if downtime service is running
-if subprocess.getoutput("systemctl is-active downtime") == "inactive":
+if subprocess.getoutput("systemctl is-active downtime") != "active":
     print("Starting Downtime...")
     os.system("systemctl start downtime")
-    time.sleep(2)
-    if subprocess.getoutput("systemctl is-active downtime") == "inactive":
+    time.sleep(5)
+    if subprocess.getoutput("systemctl is-active downtime") != "active":
         print("Downtime Failed to Start!")
 if sys.argv[1] == "register":
     register()
