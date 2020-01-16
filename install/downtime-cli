@@ -21,17 +21,28 @@ def register():
     os.system("rm -rf /tmp/registration.downtime.lock")
 def watch(service):
     dbget.writeval(service, "services")
+    os.system("systemd restart downtime")
+def unwatch(service):
+    dbget.rmval(service, "services")
+    os.system("systemd restart downtime")
 #check if downtime service is running
-if subprocess.getoutput("systemctl is-active downtime") != "active":
-    print("Starting Downtime...")
-    os.system("systemctl start downtime")
-    time.sleep(5)
+try:
     if subprocess.getoutput("systemctl is-active downtime") != "active":
-        print("Downtime Failed to Start!")
-        exit()
-elif sys.argv[1] == "register":
-    register()
-elif sys.argv[1] == "watch" and sys.argv[2]:
-    watch(sys.argv[2])
-else:
+        print("Starting Downtime...")
+        os.system("systemctl start downtime")
+        time.sleep(5)
+        if subprocess.getoutput("systemctl is-active downtime") != "active":
+            print("Downtime Failed to Start!")
+            exit()
+
+    elif sys.argv[1] == "register":
+        register()
+    elif sys.argv[1] == "watch" and sys.argv[2]:
+        watch(sys.argv[2])
+    elif sys.argv[1] == "watch" and sys.argv[2]:
+        unwatch(sys.argv[2])
+    else:
+        print("Arguments not recognised.")
+except:
     print("Arguments not recognised.")
+    exit()
