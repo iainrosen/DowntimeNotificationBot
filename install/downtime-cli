@@ -2,19 +2,27 @@
 import os
 import sys
 import time
+import subprocess
 sys.path.append("/usr/bin/downtime/")
 import dbget
 def register():
     print("Ready to Register.")
     tcyc = 0
-    while tcyc != 300:
+    while tcyc != 30:
         os.system("touch /tmp/registration.downtime.lock")
         if os.path.exists("/tmp/registration.downtime.lock") != True:
             print("Registration Complete.")
             exit()
-        time.sleep(0.1)
-        tcyc = tcyc - 1
+        time.sleep(1)
+        tcyc = tcyc + 1
     print("Registration Timeout.")
     os.system("rm -rf /tmp/registration.downtime.lock")
+#check if downtime service is running
+if subprocess.getoutput("systemctl is-active downtime") == "inactive":
+    print("Starting Downtime...")
+    os.system("systemctl start downtime")
+    time.sleep(2)
+    if subprocess.getoutput("systemctl is-active downtime") == "inactive":
+        print("Downtime Failed to Start!")
 if sys.argv[1] == "register":
     register()
