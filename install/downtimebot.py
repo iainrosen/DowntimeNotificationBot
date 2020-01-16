@@ -26,5 +26,4 @@ while True:
             msgprocess.process(usrid, text)
         time.sleep(1)
     except:
-        #suicide script if misconfigured
-        os.system("systemctl restart downtime")
+        continue #ignore and restart
