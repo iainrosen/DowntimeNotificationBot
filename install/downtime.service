@@ -5,6 +5,7 @@ Description=Downtime Notification Bot
 Type=simple
 WorkingDirectory=/usr/bin/downtime/
 ExecStart=/usr/bin/downtime/downtime.run
+ExecStop=/usr/bin/downtime/downtime.stop
 Restart=on-failure
 
 [Install]
