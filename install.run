@@ -6,17 +6,16 @@ if [[ $EUID -ne 0 ]]; then
 fi
 systemctl stop downtime
 echo "Installing Required Packages..."
-apt install python3-pip -y
-apt install python3 -y
-pip3 install telepot
-
+apt-get install python3 python3-pip -y -qq >> /dev/null
+pip3 install telepot -q
 if [ -e /usr/bin/downtime/db ]; then
   echo "Backing up configuration files..."
   mkdir /tmp/downtime
   cp -R /usr/bin/downtime/db/* /tmp/downtime
 else
   echo "Configuration files not detected."
-  echo "WARNING! The script has not detected a Downtime installation on your system. If this is NOT TRUE, press Ctrl+C NOW"
+  tput rev; echo "[WARNING] If this is a fresh install, it's okay to press ENTER. If you are upgrading Downtime, press Ctrl+C now."; tput sgr0
+  read
   sleep 5
 fi
 echo "Continuing Installation..."
@@ -42,7 +41,12 @@ echo "Enter your Bot Token:"
 read BotToken
 python3 /usr/bin/downtime/setup.py init $BotToken
 configInit=$(python3 /usr/bin/downtime/setup.py check)
+echo "Reloading Systemd..."
 systemctl daemon-reload
+echo "Enabling Downtime..."
+systemctl enable downtime
+echo "Starting Downtime..."
+systemctl start downtime
 if [ $configInit == "0" ]; then
   echo "Configuration Complete."
 else
