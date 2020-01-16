@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import time
 sys.path.append("/usr/bin/downtime/")
 import dbget
 def register():
