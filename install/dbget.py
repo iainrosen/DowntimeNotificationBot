@@ -20,3 +20,13 @@ def writeval(value, table):
         return 0
     except:
         return 1
+def rmval(value, table):
+    try:
+        conn = sqlite3.connect("/usr/bin/downtime/db/botconfig.db")
+        c = conn.cursor()
+        command = "DELETE FROM " + table + " WHERE ('" + value + "')"
+        c.execute(command)
+        conn.commit()
+        return 0
+    except:
+        return 1
