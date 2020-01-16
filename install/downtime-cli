@@ -7,7 +7,9 @@ sys.path.append("/usr/bin/downtime/")
 import dbget
 def register():
     print("Ready to Register.")
-    os.system("touch /tmp/registration.downtime.lock")
+    f = open("/tmp/registration.downtime.lock", 'w')
+    f.write("Registration Lock Set")
+    f.close()
     tcyc = 0
     while tcyc != 30:
         os.system("touch /tmp/registration.downtime.lock")
