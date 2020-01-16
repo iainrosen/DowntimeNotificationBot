@@ -21,8 +21,8 @@ def process(usrid, text):
     if text == "/start":
         sendmsg(usrid, starttext)
     elif text == "/register":
-        if os.path.exists("/tmp/registration.downtime.lock") == True:
-            cmd = "python3 /usr/bin/downtime/setup.py newuser " + usrid
+        if (os.path.exists("/tmp/registration.downtime.lock")) == True:
+            cmd = "python3 /usr/bin/downtime/setup.py newuser " + str(usrid)
             os.system(cmd)
             os.system("rm -rf /tmp/registration.downtime.lock")
             sendmsg(usrid, "Registration Complete!")
