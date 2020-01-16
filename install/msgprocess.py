@@ -23,6 +23,7 @@ def process(usrid, text):
     elif text == "/register":
         if (dbget.readval("*", "authusers") != 1):
             sendmsg(usrid, "User already registered!")
+            os.system("rm -rf /tmp/registration.downtime.lock")
             exit()
         if (os.path.exists("/tmp/registration.downtime.lock")) == True:
             cmd = "python3 /usr/bin/downtime/setup.py newuser " + str(usrid)
