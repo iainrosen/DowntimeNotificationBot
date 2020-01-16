@@ -1,4 +1,5 @@
 #!/bin/bash
+systemctl daemon-reload
 rm -rf /tmp/registration.downtime.lock
 pkill -f downtimebot.py
 pkill -f watchbot.py
