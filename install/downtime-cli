@@ -12,6 +12,8 @@ def register():
     while tcyc != 30:
         if os.path.exists("/tmp/registration.downtime.lock") == False:
             print("Registration Complete.")
+            print("Restarting Downtime...")
+            os.system("systemctl restart downtime")
             exit()
         time.sleep(1)
         tcyc = tcyc + 1
