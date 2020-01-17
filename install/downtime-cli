@@ -20,11 +20,33 @@ def register():
     print("Registration Timeout.")
     os.system("rm -rf /tmp/registration.downtime.lock")
 def watch(service):
-    dbget.writeval(service, "services")
-    os.system("systemd restart downtime")
+    try:
+        f = open("usr/bin/downtime/services.watchlist", 'a')
+        f.write(service)
+        f.write("\n")
+        f.close()
+        os.system("systemctl restart downtime")
+        return 0
+    except:
+        return 1
 def unwatch(service):
-    dbget.rmval(service, "services")
-    os.system("systemd restart downtime")
+    try:
+        newsv = []
+        f = open("usr/bin/downtime/services.watchlist", 'r')
+        services = f.readlines()
+        f.close()
+        for i in services:
+            if i != service:
+                newsv.append()
+        f = open("usr/bin/downtime/services.watchlist", 'r')
+        for i in newsv:
+            f.write(i)
+            f.write("\n")
+        f.close()
+        os.system("systemctl restart downtime")
+        return 0
+    except:
+        return 1
 #check if downtime service is running
 try:
     if subprocess.getoutput("systemctl is-active downtime") != "active":
@@ -39,7 +61,7 @@ try:
         register()
     elif sys.argv[1] == "watch" and sys.argv[2]:
         watch(sys.argv[2])
-    elif sys.argv[1] == "watch" and sys.argv[2]:
+    elif sys.argv[1] == "unwatch" and sys.argv[2]:
         unwatch(sys.argv[2])
     else:
         print("Arguments not recognised.")
