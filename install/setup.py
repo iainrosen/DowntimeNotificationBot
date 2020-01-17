@@ -22,6 +22,8 @@ def init(key):
     c.execute(insertCommand)
     conn.commit()
     print(0)
+    os.system("touch /usr/bin/downtime/services.watchlist")
+    os.system("echo downtime >> /usr/bin/downtime/services.watchlist")
     return 0
 def newuser(userid):
     if dbget.writeval(userid, "authusers") == 0:
