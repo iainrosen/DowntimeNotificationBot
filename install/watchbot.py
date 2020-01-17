@@ -12,7 +12,8 @@ servicefail = 0
 f = open("/usr/bin/downtime/services.watchlist", 'r')
 watchlist = f.readlines()
 f.close()
-servicewatch = watchlist.split("\n") #add the services you want to watch here
+servicewatch = [x.replace('\n', '') for x in watchlist]
+#add the services you want to watch here
 failed = []
 while True:
     #check for server failures
