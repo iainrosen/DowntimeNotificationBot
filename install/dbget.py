@@ -5,18 +5,8 @@ def readval(value, table):
         conn = sqlite3.connect("/usr/bin/downtime/db/botconfig.db")
         c = conn.cursor()
         command = "SELECT " + value + " FROM " + table
-        vals = []
         c.execute(command)
-        while True:
-            try:
-                rawval = c.fetchone()
-                vals.append(rawval[0])
-            except:
-                break
-        if len(vals) == 1:
-            configFetch = vals[0]
-        else:
-            configFetch = vals
+        configFetch = c.fetchone()
         return configFetch[0]
     except:
         return 1
