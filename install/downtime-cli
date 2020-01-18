@@ -24,7 +24,7 @@ def watch(service):
     print(cmdmsg)
     #TODO: dont allow multiple of the same service to be added
     try:
-        f = open("/usr/bin/downtime/services.watchlist", 'a')
+        f = open("/usr/bin/downtime/db/services.watchlist", 'a')
         f.write(service)
         f.write("\n")
         f.close()
@@ -39,14 +39,14 @@ def unwatch(service):
     print(cmdmsg)
     try:
         newsv = []
-        f = open("/usr/bin/downtime/services.watchlist", 'r')
+        f = open("/usr/bin/downtime/db/services.watchlist", 'r')
         services = f.readlines()
         services = [x.replace('\n', '') for x in services]
         f.close()
         for i in services:
             if i != service:
                 newsv.append(i)
-        f = open("/usr/bin/downtime/services.watchlist", 'w')
+        f = open("/usr/bin/downtime/db/services.watchlist", 'w')
         for i in newsv:
             f.write(i)
             f.write("\n")
