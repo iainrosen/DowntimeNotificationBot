@@ -21,7 +21,7 @@ def register():
     os.system("rm -rf /tmp/registration.downtime.lock")
 def watch(service):
     try:
-        f = open("usr/bin/downtime/services.watchlist", 'a')
+        f = open("/usr/bin/downtime/services.watchlist", 'a')
         f.write(service)
         f.write("\n")
         f.close()
@@ -32,13 +32,13 @@ def watch(service):
 def unwatch(service):
     try:
         newsv = []
-        f = open("usr/bin/downtime/services.watchlist", 'r')
+        f = open("/usr/bin/downtime/services.watchlist", 'r')
         services = f.readlines()
         f.close()
         for i in services:
             if i != service:
                 newsv.append()
-        f = open("usr/bin/downtime/services.watchlist", 'r')
+        f = open("/usr/bin/downtime/services.watchlist", 'r')
         for i in newsv:
             f.write(i)
             f.write("\n")
