@@ -4,6 +4,7 @@ import sys
 import sqlite3
 import telepot
 import dbget
+import subprocess
 joinRunning = []
 starttext = '''Welcome to Downtime!
 Before you start, we need to register you with a new server. To do this, add your user id to the config file.
@@ -39,7 +40,11 @@ def process(usrid, text):
         sendmsg(usrid, msgSend)
     #priv commands
     elif text == "/restart" and priv == True:
-       sendmsg(usrid, "Attempting to restart services...")
-       sendmsg(usrid, "Sorry this isn't implemented yet")
+       sendmsg(usrid, "Attempting to restart downtime...")
+       os.system("systemctl restart downtime")
+   elif text == "/status" and priv == True:
+       sendmsg(usrid, "Downtime is up and running correctly.")
+       stats = subprocess.getoutput("systemctl status downtime")
+       sendmsg(usrid, stats)
     else:
         sendmsg(usrid, "You might not be allowed to access that command yet.")
