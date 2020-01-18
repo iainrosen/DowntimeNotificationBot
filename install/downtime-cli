@@ -34,6 +34,7 @@ def unwatch(service):
         newsv = []
         f = open("/usr/bin/downtime/services.watchlist", 'r')
         services = f.readlines()
+        services = [x.replace('\n', '') for x in watchlist]
         f.close()
         for i in services:
             if i != service:
