@@ -34,6 +34,12 @@ if [ -e /tmp/downtime ]; then
   cp -R /tmp/downtime/* /usr/bin/downtime/db/
   rm -rf /tmp/downtime/
   echo "Upgrade Complete"
+  echo "Reloading Systemd..."
+  systemctl daemon-reload
+  echo "Enabling Downtime..."
+  systemctl enable downtime
+  echo "Starting Downtime..."
+  systemctl start downtime
   exit
 fi
 echo "Install Complete"
