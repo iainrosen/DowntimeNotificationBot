@@ -4,6 +4,8 @@ import telepot
 import sqlite3
 import msgprocess
 import dbget
+import outgoing
+import socket
 token = dbget.readval("*", "api")
 bot = telepot.Bot(token)
 lastMsg = 1
@@ -16,6 +18,10 @@ def parseMsg(msg):
     usrid = fromDetails.get("id")
     text = messageDetails.get("text")
     return updateid, usrid, text
+hname = socket.gethostname()
+userid = dbget.readval("*", "authusers")
+msg = "Downtime on " + hname + " is starting by systemd."
+outgoing.sendmsg(userid, msg)
 while True:
     try:
         message = bot.getUpdates(offset=lastMsg)
