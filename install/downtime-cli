@@ -20,6 +20,7 @@ def register():
     print("Registration Timeout.")
     os.system("rm -rf /tmp/registration.downtime.lock")
 def watch(service):
+    #TODO: dont allow multiple of the same service to be added
     try:
         f = open("/usr/bin/downtime/services.watchlist", 'a')
         f.write(service)
@@ -34,12 +35,12 @@ def unwatch(service):
         newsv = []
         f = open("/usr/bin/downtime/services.watchlist", 'r')
         services = f.readlines()
-        services = [x.replace('\n', '') for x in watchlist]
+        services = [x.replace('\n', '') for x in services]
         f.close()
         for i in services:
             if i != service:
-                newsv.append()
-        f = open("/usr/bin/downtime/services.watchlist", 'r')
+                newsv.append(i)
+        f = open("/usr/bin/downtime/services.watchlist", 'w')
         for i in newsv:
             f.write(i)
             f.write("\n")
