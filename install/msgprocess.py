@@ -42,7 +42,7 @@ def process(usrid, text):
     elif text == "/restart" and priv == True:
        sendmsg(usrid, "Attempting to restart downtime...")
        os.system("systemctl restart downtime")
-   elif text == "/status" and priv == True:
+    elif text == "/status" and priv == True:
        sendmsg(usrid, "Downtime is up and running correctly.")
        stats = subprocess.getoutput("systemctl status downtime")
        sendmsg(usrid, stats)
