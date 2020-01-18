@@ -14,7 +14,7 @@ def register():
             print("Registration Complete.")
             print("Restarting Downtime...")
             os.system("systemctl restart downtime")
-            exit()
+            return 0
         time.sleep(1)
         tcyc = tcyc + 1
     print("Registration Timeout.")
