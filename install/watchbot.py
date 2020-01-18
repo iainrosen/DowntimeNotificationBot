@@ -9,7 +9,7 @@ userid = dbget.readval("*", "authusers")
 hname = socket.gethostname()
 netfail = 0
 servicefail = 0
-f = open("/usr/bin/downtime/services.watchlist", 'r')
+f = open("/usr/bin/downtime/db/services.watchlist", 'r')
 watchlist = f.readlines()
 f.close()
 servicewatch = [x.replace('\n', '') for x in watchlist]
