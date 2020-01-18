@@ -14,9 +14,12 @@ def parseMsg(msg):
     updateid = parse.get("update_id")
     lastMsg = updateid + 1
     messageDetails = parse.get("message")
-    fromDetails = messageDetails.get("from")
-    usrid = fromDetails.get("id")
-    text = messageDetails.get("text")
+    if messageDetails:
+        #parse
+        fromDetails = messageDetails.get("from")
+        usrid = fromDetails.get("id")
+        text = messageDetails.get("text")
+        return updateid, 0, 0
     return updateid, usrid, text
 hname = socket.gethostname()
 userid = dbget.readval("*", "authusers")
@@ -28,8 +31,9 @@ while True:
         if message != []:
             updateid, usrid, text = parseMsg(message)
             lastMsg = updateid + 1
-            #process the message
-            msgprocess.process(usrid, text)
+            if usrid != 0:
+                #process the message
+                msgprocess.process(usrid, text)
         time.sleep(1)
     except:
         continue #ignore and restart
