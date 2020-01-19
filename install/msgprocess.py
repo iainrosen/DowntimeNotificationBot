@@ -42,5 +42,6 @@ def process(usrid, text):
     elif text == "/restart" and priv == True:
        sendmsg(usrid, "Attempting to restart downtime...")
        os.system("systemctl restart downtime")
+       return 0
     else:
         sendmsg(usrid, "You might not be allowed to access that command yet.")
