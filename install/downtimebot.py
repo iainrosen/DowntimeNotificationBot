@@ -19,8 +19,8 @@ def parseMsg(msg):
         fromDetails = messageDetails.get("from")
         usrid = fromDetails.get("id")
         text = messageDetails.get("text")
-        return updateid, 0, 0
-    return updateid, usrid, text
+        return updateid, usrid, text
+    return updateid, 0, 0
 hname = socket.gethostname()
 userid = dbget.readval("*", "authusers")
 msg = "Downtime on " + hname + " is starting by systemd."
