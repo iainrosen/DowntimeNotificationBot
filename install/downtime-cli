@@ -69,7 +69,7 @@ try:
             print("Downtime Failed to Start!")
             exit()
     elif sys.argv[1] == "update":
-        bash /usr/bin/downtime/update-soft.sh
+        os.system(bash /usr/bin/downtime/update-soft.sh)
     elif sys.argv[1] == "register":
         register()
     elif sys.argv[1] == "watch" and sys.argv[2]:
