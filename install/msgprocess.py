@@ -14,7 +14,7 @@ def sendmsg(userid, message):
     bot = telepot.Bot(token)
     bot.sendMessage(userid, message)
 def process(usrid, text):
-    if usrid == (dbget.readval("*", "authusers")):
+    if str(usrid) == (dbget.readval("*", "authusers")):
         priv = True
     else:
         priv = False
