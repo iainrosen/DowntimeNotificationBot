@@ -48,5 +48,10 @@ def process(usrid, text):
         sendmsg(usrid, "Attempting to start " + svstart[1])
         cmd = "systemctl start " + svstart[1]
         os.system(cmd)
+        stats = subprocess.getoutput("systemctl is-active " + svstart[1])
+        if stats == "active":
+            sendmsg(usrid, svstart[1] + " start complete.")
+        else:
+            sendmsg(usrid, svstart[1] + " start failed.")
     else:
         sendmsg(usrid, "You might not be allowed to access that command yet.")
