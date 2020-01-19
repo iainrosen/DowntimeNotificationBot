@@ -5,6 +5,8 @@ import sqlite3
 import telepot
 import dbget
 import subprocess
+import socket
+hname = socket.gethostname()
 joinRunning = []
 starttext = '''Welcome to Downtime!
 Before you start, put your server in registration mode by typing "downtime-cli register". Then, tap here -> /register'''
@@ -52,6 +54,9 @@ def process(usrid, text):
     elif text == "/getupdates" and priv == True:
         sendmsg(usrid, "Searching for updates...")
         os.system("python3 /usr/bin/downtime/update-notf.py force &")
+    elif text == "/doupdates" and priv == True:
+        sendmsg(usrid, "Executing updates on " + hname)
+        os.system("apt upgrade -y &")
     elif "/restart" in text and priv == True:
         svstart = text.rsplit(' ')
         sendmsg(usrid, "Attempting to start " + svstart[1])
