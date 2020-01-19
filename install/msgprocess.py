@@ -7,8 +7,7 @@ import dbget
 import subprocess
 joinRunning = []
 starttext = '''Welcome to Downtime!
-Before you start, we need to register you with a new server. To do this, add your user id to the config file.
-You can check your userid with /whoami'''
+Before you start, put your server in registration mode by typing "downtime-cli register". Then, tap here -> /register'''
 def sendmsg(userid, message):
     token = dbget.readval("*","api")
     bot = telepot.Bot(token)
