@@ -39,9 +39,9 @@ def process(usrid, text):
         msgSend = "Your User ID is: " + str(usrid)
         sendmsg(usrid, msgSend)
     #priv commands
-    elif text == "/restart" and priv == True:
-       sendmsg(usrid, "Attempting to restart downtime...")
-       os.system("systemctl restart downtime")
-       return 0
+    elif text == "/status" and priv == True:
+        sendmsg(usrid, "Checking status of Downtime...")
+        stats = subprocess.getoutput("systemctl status downtime")
+        sendmsg(usrid, stats)
     else:
         sendmsg(usrid, "You might not be allowed to access that command yet.")
