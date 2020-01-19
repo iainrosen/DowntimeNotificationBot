@@ -24,5 +24,7 @@ while True:
             msg = "Service: " + i + " on " + hname + " has failed!"
             outgoing.sendmsg(userid, msg)
         elif (subprocess.getoutput(checksvc)) != "inactive" and i in failed:
+            msg = "Service: " + i + " on " + hname + " back active."
+            outgoing.sendmsg(userid, msg)
             failed.remove(i)
     time.sleep(2)
