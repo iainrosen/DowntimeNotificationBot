@@ -19,7 +19,7 @@ def register():
         tcyc = tcyc + 1
     print("Registration Timeout.")
     os.system("rm -rf /tmp/registration.downtime.lock")
-def watch(service):
+def watch(service, restartop):
     cmdmsg = "Adding " + service + " to watchlist..."
     print(cmdmsg)
     #TODO: dont allow multiple of the same service to be added
@@ -28,13 +28,14 @@ def watch(service):
         f.write(service)
         f.write("\n")
         f.close()
-        os.system("systemctl restart downtime")
+        if restartop == 0:
+            os.system("systemctl restart downtime")
         print("Added.")
         return 0
     except:
         print("Downtime experienced an unknown error.")
         return 1
-def unwatch(service):
+def unwatch(service, restartop):
     cmdmsg = "Removing " + service + " from watchlist..."
     print(cmdmsg)
     try:
@@ -51,7 +52,8 @@ def unwatch(service):
             f.write(i)
             f.write("\n")
         f.close()
-        os.system("systemctl restart downtime")
+        if restartop == 0:
+            os.system("systemctl restart downtime")
         print("Removed.")
         return 0
     except:
@@ -70,9 +72,15 @@ try:
     elif sys.argv[1] == "register":
         register()
     elif sys.argv[1] == "watch" and sys.argv[2]:
-        watch(sys.argv[2])
+        watch(sys.argv[2], 0)
     elif sys.argv[1] == "unwatch" and sys.argv[2]:
-        unwatch(sys.argv[2])
+        unwatch(sys.argv[2], 0)
+    elif sys.argv[1] == "watch" and sys.argv[2] and sys.argv[3]:
+        if sys.argv[3] == "norestart":
+            watch(sys.argv[2], 1)
+    elif sys.argv[1] == "unwatch" and sys.argv[2]:
+        if sys.argv[3] == "norestart":
+            unwatch(sys.argv[2], 1)
     else:
         print("Arguments not recognised.")
 except:
