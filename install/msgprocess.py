@@ -49,6 +49,7 @@ def process(usrid, text):
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
     elif text == "/getupdates" and priv == True:
+        sendmsg(usrid, "Searching for updates...")
         os.system("python3 /usr/bin/downtime/update-notf.py force")
     elif "/restart" in text and priv == True:
         svstart = text.rsplit(' ')
