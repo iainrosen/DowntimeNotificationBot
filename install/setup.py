@@ -18,6 +18,8 @@ def init(key):
     (apikey text)''')
     c.execute('''CREATE TABLE authusers
     (userid text)''')
+    c.execute('''CREATE TABLE timeint
+    (timeint text)''')
     insertCommand = "INSERT INTO api VALUES ('" + key + "')"
     c.execute(insertCommand)
     conn.commit()
@@ -32,6 +34,13 @@ def newuser(userid):
     else:
         print(1)
         return 1
+def setint(timeint):
+    if dbget.writeval(timeint, "timeint") == 0:
+        print(0)
+        return 0
+    else:
+        print(1)
+        return 1
 try:
     if sys.argv[1] == "init":
         init(sys.argv[2])
@@ -39,6 +48,8 @@ try:
         checkconf()
     elif sys.argv[1] == "newuser":
         newuser(sys.argv[2])
+    elif sys.argv[1] == "setint":
+        setint(sys.argv[2])
     else:
         print("Argument missing or not recognized.")
 except(IndexError):
