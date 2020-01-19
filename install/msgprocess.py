@@ -12,7 +12,7 @@ helptext = '''Available Commands:
 /register           Register with Downtime Server
 /help               View this helptext
 /status             View the Downtime Server status
-/restart [service]  Restart a specified service
+/restart [x]        Restart a specified service
 /whoami             View your userid
 '''
 def sendmsg(userid, message):
