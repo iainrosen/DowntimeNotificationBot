@@ -43,10 +43,5 @@ def process(usrid, text):
         sendmsg(usrid, "Checking status of Downtime...")
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
-    elif "/watch" in text and priv == True:
-        servicewatch = text.rsplit(" ")
-        cmd = "downtime-cli watch " + servicewatch[1] + " norestart"
-        os.system(cmd)
-        sendmsg(usrid, "Now watching " + servicewatch[1])
     else:
         sendmsg(usrid, "You might not be allowed to access that command yet.")
