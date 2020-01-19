@@ -43,5 +43,10 @@ def process(usrid, text):
         sendmsg(usrid, "Checking status of Downtime...")
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
+    elif "/start" in text and priv == True:
+        svstart = text.rsplit(' ')
+        sendmsg(usrid, "Attempting to start " + svstart[1])
+        cmd = "systemctl start " + svstart[1]
+        os.system(cmd)
     else:
         sendmsg(usrid, "You might not be allowed to access that command yet.")
