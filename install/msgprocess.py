@@ -50,7 +50,7 @@ def process(usrid, text):
         sendmsg(usrid, stats)
     elif text == "/getupdates" and priv == True:
         sendmsg(usrid, "Searching for updates...")
-        os.system("python3 /usr/bin/downtime/update-notf.py force")
+        os.system("python3 /usr/bin/downtime/update-notf.py force &")
     elif "/restart" in text and priv == True:
         svstart = text.rsplit(' ')
         sendmsg(usrid, "Attempting to start " + svstart[1])
