@@ -20,6 +20,7 @@ def init(key):
     (userid text)''')
     c.execute('''CREATE TABLE timeint
     (timeint text)''')
+    dbget.writeval("1000", "timeint")
     insertCommand = "INSERT INTO api VALUES ('" + key + "')"
     c.execute(insertCommand)
     conn.commit()
