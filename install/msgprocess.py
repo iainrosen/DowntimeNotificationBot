@@ -10,6 +10,7 @@ starttext = '''Welcome to Downtime!
 Before you start, put your server in registration mode by typing "downtime-cli register". Then, tap here -> /register'''
 helptext = '''Available Commands:
 /register           Register with Downtime Server
+/getupdates         Get updates on the server with aptitude
 /help               View this helptext
 /status             View the Downtime Server status
 /restart [x]        Restart a specified service
