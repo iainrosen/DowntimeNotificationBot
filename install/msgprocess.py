@@ -46,6 +46,7 @@ def process(usrid, text):
     elif "/watch" in text and priv == True:
         servicewatch = text.rsplit(" ")
         cmd = "downtime-cli watch " + servicewatch[1]
+        text = "null"
         os.system(cmd)
         sendmsg(usrid, "Now watching " + servicewatch[1])
     else:
