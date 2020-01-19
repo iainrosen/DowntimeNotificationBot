@@ -2,6 +2,7 @@
 rm -rf /tmp/DowntimeUpdates
 mkdir /tmp/DowntimeUpdates
 cd /tmp/DowntimeUpdates
-git clone git@github.com:iainrosen/DowntimeNotificationBot.git
+echo "Downloading..."
+git clone git@github.com:iainrosen/DowntimeNotificationBot.git &> /dev/null
 cd DowntimeNotificationBot
 bash install.run
