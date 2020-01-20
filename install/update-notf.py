@@ -4,6 +4,7 @@ import sys
 import time
 import dbget
 import socket
+import telepot
 def sendmsg(userid, message):
     try:
         token = dbget.readval("*", "api")
