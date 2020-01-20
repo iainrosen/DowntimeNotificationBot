@@ -75,7 +75,8 @@ def process(usrid, text):
             else:
                 sendmsg(usrid, svstart[1] + " start failed.")
     else:
-        sendmsg(usrid, "You might not be allowed to access that command yet.")
+        if hname in text:
+            sendmsg(usrid, "You might not be allowed to access that command yet.")
 def parseMsg(msg):
     parse = message[0]
     updateid = parse.get("update_id")
@@ -88,7 +89,6 @@ def parseMsg(msg):
         text = messageDetails.get("text")
         return updateid, usrid, text
     return updateid, 0, 0
-
 userid = dbget.readval("*", "authusers")
 msg = "Downtime on " + hname + " is starting by systemd."
 sendmsg(userid, msg)
