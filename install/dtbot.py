@@ -90,7 +90,6 @@ userid = dbget.readval("*", "authusers")
 msg = "Downtime on " + hname + " is starting by systemd."
 sendmsg(userid, msg)
 while True:
-    try:
         message = bot.getUpdates(offset=lastMsg)
         if message != []:
             updateid, usrid, text = parseMsg(message)
@@ -99,5 +98,3 @@ while True:
                 #process the message
                 process(usrid, text)
         time.sleep(1)
-    except:
-        continue #ignore and restart
