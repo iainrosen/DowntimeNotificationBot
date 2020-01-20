@@ -2,6 +2,6 @@
 python3 killscript.py
 systemctl daemon-reload
 rm -rf /tmp/registration.downtime.lock
-pkill -f downtimebot.py
+pkill -f dtbot.py
 pkill -f watchbot.py
 #clean shutdown
