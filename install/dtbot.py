@@ -23,6 +23,7 @@ def sendmsg(userid, message):
     try:
         token = dbget.readval("*", "api")
         bot = telepot.Bot(token)
+        message = hname + ": " + message
         bot.sendMessage(userid, message)
         return 0
     except:
@@ -35,7 +36,7 @@ def process(usrid, text):
     #nonpriv commands
     if text == "/start":
         sendmsg(usrid, starttext)
-    elif text == "/register":
+    elif "/register" in text and hname in text:
         if (dbget.readval("*", "authusers") != 1):
             sendmsg(usrid, "User already registered!")
             os.system("rm -rf /tmp/registration.downtime.lock")
@@ -47,7 +48,7 @@ def process(usrid, text):
             sendmsg(usrid, "Registration Complete!")
         else:
             sendmsg(usrid, "Registration Unavailable.")
-    elif text == "/help":
+    elif "/help" in text and hname in text:
         sendmsg(usrid, helptext)
     elif text == "/whoami":
         msgSend = "Your User ID is: " + str(usrid)
@@ -56,22 +57,23 @@ def process(usrid, text):
     elif text == "/status" and priv == True:
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
-    elif text == "/getupdates" and priv == True:
+    elif "/getupdates" in text and priv == True and hname in text:
         sendmsg(usrid, "Searching for updates...")
         os.system("python3 /usr/bin/downtime/update-notf.py force &")
-    elif text == "/doupdates" and priv == True:
+    elif "/doupdates" in text and priv == True and hname in text:
         sendmsg(usrid, "Executing updates on " + hname)
         os.system("apt upgrade -y &")
     elif "/restart" in text and priv == True:
         svstart = text.rsplit(' ')
-        sendmsg(usrid, "Attempting to start " + svstart[1])
-        cmd = "systemctl restart " + svstart[1]
-        os.system(cmd)
-        stats = subprocess.getoutput("systemctl is-active " + svstart[1])
-        if stats == "active":
-            sendmsg(usrid, svstart[1] + " start complete.")
-        else:
-            sendmsg(usrid, svstart[1] + " start failed.")
+        if svstart[1] == hname and svstart[2]:
+            sendmsg(usrid, "Attempting to start " + svstart[1])
+            cmd = "systemctl restart " + svstart[1]
+            os.system(cmd)
+            stats = subprocess.getoutput("systemctl is-active " + svstart[1])
+            if stats == "active":
+                sendmsg(usrid, svstart[1] + " start complete.")
+            else:
+                sendmsg(usrid, svstart[1] + " start failed.")
     else:
         sendmsg(usrid, "You might not be allowed to access that command yet.")
 def parseMsg(msg):
