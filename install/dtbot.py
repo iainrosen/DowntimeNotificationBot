@@ -64,9 +64,10 @@ def process(usrid, text):
         os.system("apt upgrade -y &")
     elif "/restart" in text and priv == True:
         svstart = text.rsplit(' ')
-        sendmsg(usrid, "Attempting to start " + svstart[1])
-        cmd = "systemctl start " + svstart[1]
+        sendmsg(usrid, "Attempting to restart " + svstart[1])
+        cmd = "systemctl restart " + svstart[1] + " &"
         os.system(cmd)
+        time.sleep(2)
         stats = subprocess.getoutput("systemctl is-active " + svstart[1])
         if stats == "active":
             sendmsg(usrid, svstart[1] + " start complete.")
