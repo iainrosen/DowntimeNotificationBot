@@ -3,8 +3,14 @@ import os
 import sys
 import time
 import dbget
-import outgoing
 import socket
+def sendmsg(userid, message):
+    try:
+        token = dbget.readval("*", "api")
+        bot = telepot.Bot(token)
+        bot.sendMessage(userid, message)
+    except:
+        continue
 force = False
 hname = socket.gethostname()
 if sys.argv[1]:
@@ -19,11 +25,11 @@ while True:
         updateslist = subprocess.getoutput("aptitude search '~U'")
         if updateslist != "":
             usrid = dbget.readval("*", "authusers")
-            outgoing.sendmsg(usrid, "Updates Available for " + hname)
-            outgoing.sendmsg(usrid, updateslist)
+            sendmsg(usrid, "Updates Available for " + hname)
+            sendmsg(usrid, updateslist)
         if updateslist == "" and force == True:
             usrid = dbget.readval("*", "authusers")
-            outgoing.sendmsg(usrid, "No Updates Available for " + hname)
+            sendmsg(usrid, "No Updates Available for " + hname)
         time.sleep(60)
         if force == True:
             break

@@ -23,9 +23,8 @@ def sendmsg(userid, message):
         token = dbget.readval("*", "api")
         bot = telepot.Bot(token)
         bot.sendMessage(userid, message)
-        return 0
     except:
-        return 1
+        continue
 def process(usrid, text):
     if str(usrid) == (dbget.readval("*", "authusers")):
         priv = True

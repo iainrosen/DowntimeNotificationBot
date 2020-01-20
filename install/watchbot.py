@@ -1,10 +1,16 @@
 import os
 import time
 import sys
-import outgoing
 import socket
 import subprocess
 import dbget
+def sendmsg(userid, message):
+    try:
+        token = dbget.readval("*", "api")
+        bot = telepot.Bot(token)
+        bot.sendMessage(userid, message)
+    except:
+        continue
 userid = dbget.readval("*", "authusers")
 hname = socket.gethostname()
 netfail = 0
@@ -22,9 +28,9 @@ while True:
         if (subprocess.getoutput(checksvc)) == "inactive" and i not in failed:
             failed.append(i)
             msg = "Service: " + i + " on " + hname + " has failed!"
-            outgoing.sendmsg(userid, msg)
+            sendmsg(userid, msg)
         elif (subprocess.getoutput(checksvc)) != "inactive" and i in failed:
             msg = "Service: " + i + " on " + hname + " back active."
-            outgoing.sendmsg(userid, msg)
+            sendmsg(userid, msg)
             failed.remove(i)
     time.sleep(2)
