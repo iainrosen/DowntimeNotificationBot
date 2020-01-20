@@ -9,8 +9,9 @@ def sendmsg(userid, message):
         token = dbget.readval("*", "api")
         bot = telepot.Bot(token)
         bot.sendMessage(userid, message)
+        return 0
     except:
-        continue
+        return 1
 userid = dbget.readval("*", "authusers")
 hname = socket.gethostname()
 netfail = 0
