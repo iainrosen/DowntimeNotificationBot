@@ -4,6 +4,7 @@ import telepot
 import sqlite3
 import dbget
 import socket
+import subprocess
 token = dbget.readval("*", "api")
 bot = telepot.Bot(token)
 lastMsg = 1
