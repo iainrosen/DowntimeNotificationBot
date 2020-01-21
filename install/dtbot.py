@@ -1,7 +1,6 @@
 import os
 import time
 import telepot
-import sqlite3
 import dbget
 import socket
 import subprocess
@@ -30,6 +29,8 @@ def sendmsg(userid, message):
     except:
         dlog.critical("Failed to send message to: " + str(userid) + ". Message was: " + message)
         return 1
+
+        
 def process(usrid, text):
     if str(usrid) == (dbget.readval("*", "authusers")):
         priv = True
@@ -39,7 +40,7 @@ def process(usrid, text):
         dlog.info("Recieved message: " + text + " from unprivileged user: " + str(usrid))
     #nonpriv commands
     if text == "/start":
-        if priv == True:
+        if priv is True:
             sendmsg(usrid, "Looks like you're already setup! Type /help for a list of available commands")
         else:
             sendmsg(usrid, "Hello from " + hname + "!")
@@ -49,7 +50,7 @@ def process(usrid, text):
             sendmsg(usrid, "User already registered!")
             os.system("rm -rf /tmp/registration.downtime.lock")
             return 0
-        if (os.path.exists("/tmp/registration.downtime.lock")) == True:
+        if (os.path.exists("/tmp/registration.downtime.lock")) is True:
             dlog.info("Registering new user: " + str(usrid) + "...")
             cmd = "python3 /usr/bin/downtime/setup.py newuser " + str(usrid)
             os.system(cmd)
@@ -62,17 +63,17 @@ def process(usrid, text):
     elif text == ("/help " + hname):
         sendmsg(usrid, helptext)
     #priv commands
-    elif text == "/status" and priv == True:
+    elif text == "/status" and priv is True:
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
-    elif text == ("/getupdates " + hname) and priv == True:
+    elif text == ("/getupdates " + hname) and priv is True:
         sendmsg(usrid, "Searching for updates...")
         os.system("python3 /usr/bin/downtime/update-notf.py force &")
-    elif text == ("/doupdates " + hname) and priv == True:
+    elif text == ("/doupdates " + hname) and priv is True:
         sendmsg(usrid, "Executing updates on " + hname)
-        dlog.info("Executing updates as per command of user: ", str(usrid))
+        dlog.info("Executing updates as per command of user: " + str(usrid))
         os.system("apt upgrade -y &")
-    elif "/restart" in text and priv == True:
+    elif "/restart" in text and priv is True:
         svstart = text.rsplit(' ')
         if svstart[1] == hname and svstart[2]:
             if svstart[2] == "downtime":
@@ -93,7 +94,9 @@ def process(usrid, text):
         if hname in text:
             dlog.warning("User, " + str(usrid) + " attempted to access an unauthorized or unknown command.")
             sendmsg(usrid, "You might not be allowed to access that command yet.")
-def parseMsg(msg):
+
+
+def parseMsg(message):
     parse = message[0]
     updateid = parse.get("update_id")
     lastMsg = updateid + 1
@@ -111,6 +114,8 @@ def parseMsg(msg):
         text = messageDetails.get("text")
         return updateid, usrid, text
     return updateid, 0, 0
+
+
 userid = dbget.readval("*", "authusers")
 msg = "Downtime on " + hname + " is starting by systemd."
 sendmsg(userid, msg)

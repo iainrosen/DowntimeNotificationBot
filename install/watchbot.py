@@ -1,6 +1,4 @@
-import os
 import time
-import sys
 import socket
 import subprocess
 import dbget

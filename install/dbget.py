@@ -1,4 +1,3 @@
-import telepot
 import sqlite3
 def readval(value, table):
     try:

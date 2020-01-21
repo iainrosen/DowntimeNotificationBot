@@ -1,10 +1,9 @@
 import os
 import sys
-import time
 import sqlite3
 import dbget
 def checkconf():
-    if os.path.exists("/usr/bin/downtime/db/botconfig.db") == True:
+    if os.path.exists("/usr/bin/downtime/db/botconfig.db") is True:
         print(0)
         return 0
     else:
