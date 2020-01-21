@@ -70,6 +70,9 @@ def listwatching():
             if i not in sv:
                 sv.append(i)
         print(sv)
+    except:
+        print("Error.")
+        return 1
 #check if downtime service is running
 try:
     if subprocess.getoutput("systemctl is-active downtime") != "active":
