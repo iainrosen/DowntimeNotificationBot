@@ -114,7 +114,6 @@ sendmsg(userid, msg)
 while True:
         message = bot.getUpdates(offset=lastMsg)
         if message != []:
-            dlog.info("RAW MESSAGE DUMP: " + str(message))
             updateid, usrid, text = parseMsg(message)
             lastMsg = updateid + 1
             if usrid != 0:
