@@ -101,12 +101,11 @@ def parseMsg(msg):
         usrid = fromDetails.get("id")
         text = messageDetails.get("text")
         return updateid, usrid, text
-    if messageDetails == False:
+    else:
         messageDetails = parse.get("edited_message")
         fromDetails = messageDetails.get("from")
         usrid = fromDetails.get("id")
         text = messageDetails.get("text")
-        updateid = updateid + 1 #force process
         return updateid, usrid, text
     return updateid, 0, 0
 userid = dbget.readval("*", "authusers")
