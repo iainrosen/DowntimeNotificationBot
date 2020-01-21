@@ -77,16 +77,16 @@ def process(usrid, text):
         svstart = text.rsplit(' ')
         if svstart[1] == hname and svstart[2]:
             dlog.info(str(usrid) + " initiated restart of " + svstart[2] + ".")
-            sendmsg(usrid, "Attempting to start " + svstart[1])
-            cmd = "systemctl restart " + svstart[1]
+            sendmsg(usrid, "Attempting to start " + svstart[2])
+            cmd = "systemctl restart " + svstart[2]
             os.system(cmd)
-            stats = subprocess.getoutput("systemctl is-active " + svstart[1])
+            stats = subprocess.getoutput("systemctl is-active " + svstart[2])
             if stats == "active":
                 dlog.info("Service restarted successfully")
-                sendmsg(usrid, svstart[1] + " start complete.")
+                sendmsg(usrid, svstart[2] + " start complete.")
             else:
                 dlog.warning("Service restart failed.")
-                sendmsg(usrid, svstart[1] + " start failed.")
+                sendmsg(usrid, svstart[2] + " start failed.")
     else:
         if hname in text:
             dlog.warning("User, " + str(usrid) + " attempted to access an unauthorized or unknown command.")
