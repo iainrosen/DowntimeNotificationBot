@@ -1,6 +1,8 @@
 import dbget
 import socket
 import dlog
+import telepot
+dlog.info("Downtime is stopping...")
 hname = socket.gethostname()
 userid = dbget.readval("*", "authusers")
 msg = "Downtime on " + hname + " is stopping by systemd."
