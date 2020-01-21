@@ -12,13 +12,12 @@ bot = telepot.Bot(token)
 lastMsg = 1
 hname = socket.gethostname()
 helptext = '''Available Commands:
-/register           Register with Downtime Server
-/getupdates         Get updates on the server with aptitude
-/doupdates          Update the server's packages with aptitude
+/register [server]          Register with Downtime Server
+/getupdates [server]        Get updates on the server with aptitude
+/doupdates [server]         Update the server's packages with aptitude
 /help               View this helptext
-/status             View the Downtime Server status
-/restart [x]        Restart a specified service
-/whoami             View your userid (DEPRICATED)
+/status             View the Downtime Server status of all servers connected
+/restart [server] [service]        Restart a specified service
 '''
 def sendmsg(userid, message):
     try:
