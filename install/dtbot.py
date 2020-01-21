@@ -77,7 +77,6 @@ def process(usrid, text):
     else:
         if hname in text:
             sendmsg(usrid, "You might not be allowed to access that command yet.")
-    text = 0
 def parseMsg(msg):
     parse = message[0]
     updateid = parse.get("update_id")
