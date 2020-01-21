@@ -57,10 +57,10 @@ def process(usrid, text):
     elif text == "/status" and priv == True:
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
-    elif "/getupdates" in text and priv == True and hname in text:
+    elif text == ("/getupdates " + hname) and priv == True:
         sendmsg(usrid, "Searching for updates...")
         os.system("python3 /usr/bin/downtime/update-notf.py force &")
-    elif "/doupdates" in text and priv == True and hname in text:
+    elif text == ("/doupdates " + hname) and priv == True:
         sendmsg(usrid, "Executing updates on " + hname)
         os.system("apt upgrade -y &")
     elif "/restart" in text and priv == True:
