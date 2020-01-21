@@ -106,6 +106,7 @@ def parseMsg(msg):
         fromDetails = messageDetails.get("from")
         usrid = fromDetails.get("id")
         text = messageDetails.get("text")
+        updateid = updateid + 1 #force process
         return updateid, usrid, text
     return updateid, 0, 0
 userid = dbget.readval("*", "authusers")
