@@ -44,7 +44,6 @@ def process(usrid, text):
             sendmsg(usrid, "Looks like you're already setup! Type /help for a list of available commands")
         else:
             sendmsg(usrid, "Hello from " + hname + "!")
-        sendmsg(usrid, starttext)
     elif text == ("/register " + hname):
         if (dbget.readval("*", "authusers") != 1):
             dlog.warning("User initiated registration, but was already registered. Userid: " + str(usrid))
