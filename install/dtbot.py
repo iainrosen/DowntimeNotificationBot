@@ -28,10 +28,10 @@ def sendmsg(userid, message):
         bot = telepot.Bot(token)
         message = hname + ": " + message
         bot.sendMessage(userid, message)
-        dlog.info("Sent message: " + message + "to userid: " + userid)
+        dlog.info("Sent message: " + message + "to userid: " + str(userid))
         return 0
     except:
-        dlog.critical("Failed to send message to: " + userid + ". Message was: " + message)
+        dlog.critical("Failed to send message to: " + str(userid) + ". Message was: " + message)
         return 1
 def process(usrid, text):
     if str(usrid) == (dbget.readval("*", "authusers")):
