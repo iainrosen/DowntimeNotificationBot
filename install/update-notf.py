@@ -20,7 +20,6 @@ if sys.argv[1]:
     if sys.argv[1] == "force":
         force = True
 while True:
-    #wait for time to be 2am local
     ctime = time.strftime("%H%M")
     if str(ctime) == (dbget.readval("*", "timeint")) or force == True:
         os.system("aptitude update")
