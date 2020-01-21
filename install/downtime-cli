@@ -93,6 +93,8 @@ try:
     elif sys.argv[1] == "unwatch" and sys.argv[2]:
         if sys.argv[3] == "norestart":
             unwatch(sys.argv[2], 1)
+    elif sys.argv[1] == "listwatching":
+        listwatching()
     else:
         print("Arguments not recognised.")
 except:
