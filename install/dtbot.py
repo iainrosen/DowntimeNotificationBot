@@ -11,8 +11,6 @@ token = dbget.readval("*", "api")
 bot = telepot.Bot(token)
 lastMsg = 1
 hname = socket.gethostname()
-starttext = '''Welcome to Downtime!
-Before you start, put your server in registration mode by typing "downtime-cli register". Then, tap here -> /register'''
 helptext = '''Available Commands:
 /register           Register with Downtime Server
 /getupdates         Get updates on the server with aptitude
@@ -42,6 +40,10 @@ def process(usrid, text):
         dlog.info("Recieved message: " + text + " from unprivileged user: " + str(usrid))
     #nonpriv commands
     if text == "/start":
+        if priv == True:
+            sendmsg(usrid, "Looks like you're already setup! Type /help for a list of available commands")
+        else:
+            sendmsg(usrid, "Hello from " + hname + "!")
         sendmsg(usrid, starttext)
     elif text == ("/register " + hname):
         if (dbget.readval("*", "authusers") != 1):
