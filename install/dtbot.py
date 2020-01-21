@@ -36,7 +36,7 @@ def process(usrid, text):
     #nonpriv commands
     if text == "/start":
         sendmsg(usrid, starttext)
-    elif "/register" in text and hname in text:
+    elif text == ("/register " + hname):
         if (dbget.readval("*", "authusers") != 1):
             sendmsg(usrid, "User already registered!")
             os.system("rm -rf /tmp/registration.downtime.lock")
@@ -48,7 +48,7 @@ def process(usrid, text):
             sendmsg(usrid, "Registration Complete!")
         else:
             sendmsg(usrid, "Registration Unavailable.")
-    elif "/help" in text and hname in text:
+    elif text == ("/help " + hname):
         sendmsg(usrid, helptext)
     elif text == "/whoami":
         msgSend = "Your User ID is: " + str(usrid)
