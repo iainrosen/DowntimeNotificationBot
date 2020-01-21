@@ -36,28 +36,28 @@ def sendmsg(userid, message):
 def process(usrid, text):
     if str(usrid) == (dbget.readval("*", "authusers")):
         priv = True
-        dlog.info("Recieved message: " + text + " from privileged user: " + usrid)
+        dlog.info("Recieved message: " + text + " from privileged user: " + str(usrid))
     else:
         priv = False
-        dlog.info("Recieved message: " + text + " from unprivileged user: " + usrid)
+        dlog.info("Recieved message: " + text + " from unprivileged user: " + str(usrid))
     #nonpriv commands
     if text == "/start":
         sendmsg(usrid, starttext)
     elif text == ("/register " + hname):
         if (dbget.readval("*", "authusers") != 1):
-            dlog.warning("User initiated registration, but was already registered. Userid: " + usrid)
+            dlog.warning("User initiated registration, but was already registered. Userid: " + str(usrid))
             sendmsg(usrid, "User already registered!")
             os.system("rm -rf /tmp/registration.downtime.lock")
             return 0
         if (os.path.exists("/tmp/registration.downtime.lock")) == True:
-            dlog.info("Registering new user: " + usrid + "...")
+            dlog.info("Registering new user: " + str(usrid) + "...")
             cmd = "python3 /usr/bin/downtime/setup.py newuser " + str(usrid)
             os.system(cmd)
             os.system("rm -rf /tmp/registration.downtime.lock")
             sendmsg(usrid, "Registration Complete!")
-            dlog.info("Registered " + usrid)
+            dlog.info("Registered " + str(usrid))
         else:
-            dlog.warning("User attempted to register but registration was unavailable. Userid: "+usrid)
+            dlog.warning("User attempted to register but registration was unavailable. Userid: "+str(usrid))
             sendmsg(usrid, "Registration Unavailable.")
     elif text == ("/help " + hname):
         sendmsg(usrid, helptext)
@@ -70,12 +70,12 @@ def process(usrid, text):
         os.system("python3 /usr/bin/downtime/update-notf.py force &")
     elif text == ("/doupdates " + hname) and priv == True:
         sendmsg(usrid, "Executing updates on " + hname)
-        dlog.info("Executing updates as per command of user: ", usrid)
+        dlog.info("Executing updates as per command of user: ", str(usrid))
         os.system("apt upgrade -y &")
     elif "/restart" in text and priv == True:
         svstart = text.rsplit(' ')
         if svstart[1] == hname and svstart[2]:
-            dlog.info(usrid + " initiated restart of " + svstart[2] + ".")
+            dlog.info(str(usrid) + " initiated restart of " + svstart[2] + ".")
             sendmsg(usrid, "Attempting to start " + svstart[1])
             cmd = "systemctl restart " + svstart[1]
             os.system(cmd)
@@ -88,7 +88,7 @@ def process(usrid, text):
                 sendmsg(usrid, svstart[1] + " start failed.")
     else:
         if hname in text:
-            dlog.warning("User, " + usrid + " attempted to access an unauthorized or unknown command.")
+            dlog.warning("User, " + str(usrid) + " attempted to access an unauthorized or unknown command.")
             sendmsg(usrid, "You might not be allowed to access that command yet.")
 def parseMsg(msg):
     parse = message[0]
