@@ -40,7 +40,7 @@ def process(usrid, text):
         if (dbget.readval("*", "authusers") != 1):
             sendmsg(usrid, "User already registered!")
             os.system("rm -rf /tmp/registration.downtime.lock")
-            exit()
+            return 0
         if (os.path.exists("/tmp/registration.downtime.lock")) == True:
             cmd = "python3 /usr/bin/downtime/setup.py newuser " + str(usrid)
             os.system(cmd)
@@ -48,7 +48,7 @@ def process(usrid, text):
             sendmsg(usrid, "Registration Complete!")
         else:
             sendmsg(usrid, "Registration Unavailable.")
-    elif text == ("/help " + hname):
+    elif text == ("/register " + hname):
         sendmsg(usrid, helptext)
     elif text == "/whoami":
         msgSend = "Your User ID is: " + str(usrid)
