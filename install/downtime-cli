@@ -22,7 +22,6 @@ def register():
 def watch(service, restartop):
     cmdmsg = "Adding " + service + " to watchlist..."
     print(cmdmsg)
-    #TODO: dont allow multiple of the same service to be added
     try:
         f = open("/usr/bin/downtime/db/services.watchlist", 'a')
         f.write(service)
@@ -82,7 +81,7 @@ try:
         if subprocess.getoutput("systemctl is-active downtime") != "active":
             print("Downtime Failed to Start!")
             exit()
-    elif sys.argv[1] == "update":
+    if sys.argv[1] == "update":
         os.system("bash /usr/bin/downtime/update-soft.sh")
     elif sys.argv[1] == "register":
         register()
@@ -96,7 +95,7 @@ try:
     elif sys.argv[1] == "unwatch" and sys.argv[2]:
         if sys.argv[3] == "norestart":
             unwatch(sys.argv[2], 1)
-    elif sys.argv[1] == "listwatching":
+    elif sys.argv[1] == "watchlist":
         listwatching()
     else:
         print("Arguments not recognised.")
