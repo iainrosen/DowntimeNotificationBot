@@ -59,6 +59,17 @@ def unwatch(service, restartop):
     except:
         print("Downtime experienced an unknown error.")
         return 1
+def listwatching():
+    try:
+        sv = []
+        f = open("/usr/bin/downtime/db/services.watchlist", 'r')
+        services = f.readlines()
+        services = [x.replace('\n', '') for x in services]
+        f.close()
+        for i in services:
+            if i not in sv:
+                sv.append(i)
+        print(sv)
 #check if downtime service is running
 try:
     if subprocess.getoutput("systemctl is-active downtime") != "active":
