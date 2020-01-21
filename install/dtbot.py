@@ -75,6 +75,9 @@ def process(usrid, text):
     elif "/restart" in text and priv == True:
         svstart = text.rsplit(' ')
         if svstart[1] == hname and svstart[2]:
+            if svstart[2] == "downtime":
+                sendmsg(usrid, "Downtime cannot restart itself.")
+                return 0
             dlog.info(str(usrid) + " initiated restart of " + svstart[2] + ".")
             sendmsg(usrid, "Attempting to start " + svstart[2])
             cmd = "systemctl restart " + svstart[2]
