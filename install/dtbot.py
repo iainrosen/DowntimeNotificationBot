@@ -30,7 +30,7 @@ def sendmsg(userid, message):
         dlog.critical("Failed to send message to: " + str(userid) + ". Message was: " + message)
         return 1
 
-        
+
 def process(usrid, text):
     if str(usrid) == (dbget.readval("*", "authusers")):
         priv = True
@@ -63,7 +63,7 @@ def process(usrid, text):
     elif text == ("/help " + hname):
         sendmsg(usrid, helptext)
     #priv commands
-    elif text == "/status" and priv is True:
+    elif text == "/status all" and priv is True or text == ("/status "+hname) and priv is True:
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
     elif text == ("/getupdates " + hname) and priv is True:
