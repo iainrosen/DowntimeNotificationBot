@@ -15,7 +15,7 @@ if [ -e /usr/bin/downtime/db ]; then
 else
   echo "Configuration files not detected."
   dialog --yesno "[WARNING] If this is a fresh install, it's okay to press ENTER. If you are upgrading Downtime, press Ctrl+C now as the installer has not detected configuration files." 0 0
-  response = $?
+  response=$?
   case response in
     0) echo "Continuing Installation...";;
     1) exit;;
