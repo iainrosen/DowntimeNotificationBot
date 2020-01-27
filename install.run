@@ -46,7 +46,7 @@ if [ -e /tmp/downtime ]; then
   exit
 fi
 echo "Install Complete"
-dialog --title "Bot Token Initialization" --inputbox "Enter your Bot Token:" 0 0 2>$OUTPUT
+dialog --title "Bot Token Initialization" --inputbox "Enter your Bot Token:" 0 0 2>OUTPUT
 response=$?
 case $response in
   0) python3 /usr/bin/downtime/setup.py init $OUTPUT;;
