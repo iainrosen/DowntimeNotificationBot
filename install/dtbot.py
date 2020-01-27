@@ -10,14 +10,7 @@ token = dbget.readval("*", "api")
 bot = telepot.Bot(token)
 lastMsg = 1
 hname = socket.gethostname()
-helptext = '''Available Commands:
-/register [server]          Register with Downtime Server
-/getupdates [server]        Get updates on the server with aptitude
-/doupdates [server]         Update the server's packages with aptitude
-/help               View this helptext
-/status [hostname or "all"]            View the Downtime Server status of all servers connected
-/restart [server] [service]        Restart a specified service
-'''
+helptext = "Help text available at: https://github.com/iainrosen/DowntimeNotificationBot/blob/master/README.md"
 def sendmsg(userid, message):
     try:
         token = dbget.readval("*", "api")

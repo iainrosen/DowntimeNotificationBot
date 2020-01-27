@@ -28,3 +28,23 @@ To change the time which Downtime notifies of updates:
 ```
 python3 /usr/bin/downtime/setup.py setint [hhmm]
 ```
+
+## User Registration
+Downtime uses a CLI to make administration easier. To start the registration process, type:
+```
+downtime-cli register
+```
+This will open registration to any user for 30 seconds. To register a new user, open Telegram and navigate to the bot, then type:
+```
+/register [hname] (where hname is the server's hostname)
+```
+Downtime will confirm that the user is registered and the server will stop any other registrations from proceeding.
+## Available Commands
+```/help``` Displays a link to this page
+```/register [hname]``` Attempts to register a user with the specified host
+```/status [hname]``` Displays the status of the Downtime Service on a specified host
+```/status all``` Displays the status of the Downtime Service on all servers connected to the Telegram bot
+```/ping``` Pings all servers connected to the bot
+```/getupdates [hname]``` Checks for updates on the specified host (Can take up to a minute)
+```/doupdates [hname]``` Runs updates on all available packages on a specified host
+```/restart [hname] [service]``` Attempts to restart a failed service on a specified host
