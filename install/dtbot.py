@@ -117,11 +117,11 @@ sendmsg(userid, msg)
 while True:
     try:
         message = bot.getUpdates(offset=lastMsg)
-        if message != []:
+    except:
+        message = bot.getUpdates(offset=-1)
+    if message != []:
             updateid, usrid, text = parseMsg(message)
             lastMsg = updateid + 1
             if usrid != 0:
                 #process the message
                 process(usrid, text)
-    except:
-        continue
