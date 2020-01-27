@@ -16,7 +16,7 @@ else
   echo "Configuration files not detected."
   dialog --yesno "[WARNING] If this is a fresh install, it's okay to press YES. If you are upgrading Downtime, press NO now as the installer has not detected configuration files." 0 0
   response=$?
-  case response in
+  case $response in
     0) echo "Continuing Installation...";;
     1) exit;;
     255) exit;;
