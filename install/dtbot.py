@@ -132,4 +132,4 @@ while True:
             print(usrid, text)
             if usrid != 0:
                 #process the message
-                process(usrid, text)s
+                process(usrid, text)
