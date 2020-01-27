@@ -123,13 +123,5 @@ while True:
             if usrid != 0:
                 #process the message
                 process(usrid, text)
-        time.sleep(1)
     except:
-        message = bot.getUpdates(offset=0)
-        print(str(message))
-        if message != []:
-            updateid, usrid, text = parseMsg(message)
-            print(usrid, text)
-            if usrid != 0:
-                #process the message
-                process(usrid, text)
+        continue
