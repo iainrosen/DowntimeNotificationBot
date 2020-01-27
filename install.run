@@ -48,7 +48,6 @@ fi
 echo "Install Complete"
 dialog --title "Bot Token Initialization" --inputbox "Enter your Bot Token:" 0 0 2>$OUTPUT
 response=$?
-name=$(<$OUTPUT)
 case $response in
   0) python3 /usr/bin/downtime/setup.py init $OUTPUT;;
   1) clear && echo "Installation Unconfigured..." && exit;;
