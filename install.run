@@ -46,9 +46,14 @@ if [ -e /tmp/downtime ]; then
   exit
 fi
 echo "Install Complete"
-echo "Enter your Bot Token:"
-read BotToken
-python3 /usr/bin/downtime/setup.py init $BotToken
+dialog --title "Bot Token Initialization" --inputbox "Enter your Bot Token:" 0 0 2>$OUTPUT
+response=$?
+name=$(<$OUTPUT)
+case $response in
+  0) python3 /usr/bin/downtime/setup.py init $OUTPUT;;
+  1) clear && echo "Stopping Installation..." && exit;;
+  255) clear && echo "Stopping Installation..." && exit;;
+esac
 configInit=$(python3 /usr/bin/downtime/setup.py check)
 echo "Reloading Systemd..."
 systemctl daemon-reload
