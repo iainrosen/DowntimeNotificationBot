@@ -48,3 +48,6 @@ Downtime will confirm that the user is registered and the server will stop any o
 ```/getupdates [hname]``` Checks for updates on the specified host (Can take up to a minute)
 ```/doupdates [hname]``` Runs updates on all available packages on a specified host
 ```/restart [hname] [service]``` Attempts to restart a failed service on a specified host
+
+## A note about multi-server functionality
+Although multi-server functionality is technically available, where more than one server can be used on a single bot, the feature is buggy and sometimes servers just don't respond on command, so we would suggest not using this feature yet. An update will be posted when this feature is more stable.
