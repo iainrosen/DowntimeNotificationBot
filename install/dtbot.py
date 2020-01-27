@@ -121,3 +121,5 @@ userid = dbget.readval("*", "authusers")
 msg = "Downtime on " + hname + " is starting by systemd."
 sendmsg(userid, msg)
 MessageLoop(bot, handle).run_as_thread()
+while 1:
+    sleep 1
