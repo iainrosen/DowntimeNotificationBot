@@ -118,7 +118,7 @@ while True:
     try:
         message = bot.getUpdates(offset=lastMsg)
     except:
-        message = bot.getUpdates(offset=-1)
+        message = bot.getUpdates()
     if message != []:
             updateid, usrid, text = parseMsg(message)
             lastMsg = updateid + 1
