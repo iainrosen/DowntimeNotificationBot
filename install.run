@@ -51,8 +51,8 @@ response=$?
 name=$(<$OUTPUT)
 case $response in
   0) python3 /usr/bin/downtime/setup.py init $OUTPUT;;
-  1) clear && echo "Stopping Installation..." && exit;;
-  255) clear && echo "Stopping Installation..." && exit;;
+  1) clear && echo "Installation Unconfigured..." && exit;;
+  255) clear && echo "Installation Unconfigured..." && exit;;
 esac
 configInit=$(python3 /usr/bin/downtime/setup.py check)
 echo "Reloading Systemd..."
