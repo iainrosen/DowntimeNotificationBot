@@ -18,8 +18,8 @@ else
   response=$?
   case $response in
     0) echo "Continuing Installation...";;
-    1) exit;;
-    255) exit;;
+    1) clear && echo "Stopping Installation..." && exit;;
+    255) clear && echo "Stopping Installation..." && exit;;
   esac
 fi
 rm -rf /usr/bin/downtime/
