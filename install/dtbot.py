@@ -15,7 +15,7 @@ helptext = '''Available Commands:
 /getupdates [server]        Get updates on the server with aptitude
 /doupdates [server]         Update the server's packages with aptitude
 /help               View this helptext
-/status             View the Downtime Server status of all servers connected
+/status [hostname or "all"]            View the Downtime Server status of all servers connected
 /restart [server] [service]        Restart a specified service
 '''
 def sendmsg(userid, message):
@@ -44,6 +44,8 @@ def process(usrid, text):
             sendmsg(usrid, "Looks like you're already setup! Type /help for a list of available commands")
         else:
             sendmsg(usrid, "Hello from " + hname + "!")
+    elif text == "/ping":
+        sendmsg(usrid, hname+" is up!")
     elif text == ("/register " + hname):
         if (dbget.readval("*", "authusers") != 1):
             dlog.warning("User initiated registration, but was already registered. Userid: " + str(usrid))
