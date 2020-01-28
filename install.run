@@ -44,6 +44,8 @@ if [ -e /tmp/downtime ]; then
   systemctl daemon-reload
   systemctl enable downtime
   systemctl start downtime
+  clear
+  echo "Installation Complete"
   exit
 fi
 echo "Install Complete"
@@ -58,9 +60,11 @@ case $response in
 esac
 configInit=$(python3 /usr/bin/downtime/setup.py check)
 dialog --title "Completing Installation" --infobox "Please Wait" 0 0
+sleep 2
 systemctl daemon-reload
 systemctl enable downtime --quiet
 systemctl start downtime
+clear
 if [ $configInit == "0" ]; then
   echo "Configuration Complete."
 else
