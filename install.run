@@ -37,12 +37,9 @@ if [ -e /tmp/downtime ]; then
   dialog --title "Copying old config files to new installation..." --infobox "Please Wait" 0 0
   cp -R /tmp/downtime/* /usr/bin/downtime/db/
   rm -rf /tmp/downtime/
-  echo "Upgrade Complete"
   dialog --title "Completing Installation" --infobox "Please Wait" 0 0
   systemctl daemon-reload
-  echo "Enabling Downtime..."
   systemctl enable downtime
-  echo "Starting Downtime..."
   systemctl start downtime
   exit
 fi
