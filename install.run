@@ -10,7 +10,7 @@ dialog --title "Installing Required Packages" --infobox "Please Wait" 0 0
 apt-get install python3 python3-pip aptitude dialog -y -qq
 pip3 install telepot -q
 if [ -e /usr/bin/downtime/db ]; then
-  echo "Backing up configuration files..."
+  dialog --title "Backing Up Configuration" --infobox "Please Wait" 0 0
   mkdir /tmp/downtime
   cp -R /usr/bin/downtime/db/* /tmp/downtime
 else
@@ -34,11 +34,11 @@ mv /usr/bin/downtime/downtime-cli /usr/bin
 chmod +x /usr/bin/downtime/*
 chmod +x /usr/bin/downtime-cli
 if [ -e /tmp/downtime ]; then
-  echo "Copying old config files to new installation..."
+  dialog --title "Copying old config files to new installation..." --infobox "Please Wait" 0 0
   cp -R /tmp/downtime/* /usr/bin/downtime/db/
   rm -rf /tmp/downtime/
   echo "Upgrade Complete"
-  echo "Reloading Systemd..."
+  dialog --title "Completing Installation" --infobox "Please Wait" 0 0
   systemctl daemon-reload
   echo "Enabling Downtime..."
   systemctl enable downtime
