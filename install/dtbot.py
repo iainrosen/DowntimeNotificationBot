@@ -15,7 +15,6 @@ def sendmsg(userid, message):
     try:
         token = dbget.readval("*", "api")
         bot = telepot.Bot(token)
-        message = hname + ": " + message
         bot.sendMessage(userid, message)
         dlog.info("Sent message: " + message + "to userid: " + str(userid))
         return 0
@@ -39,7 +38,7 @@ def process(usrid, text):
             sendmsg(usrid, "Hello from " + hname + "!")
     elif text == "/ping":
         sendmsg(usrid, hname+" is up!")
-    elif text == ("/register " + hname):
+    elif text == "/register":
         if (dbget.readval("*", "authusers") != 1):
             dlog.warning("User initiated registration, but was already registered. Userid: " + str(usrid))
             sendmsg(usrid, "User already registered!")
@@ -55,40 +54,40 @@ def process(usrid, text):
         else:
             dlog.warning("User attempted to register but registration was unavailable. Userid: "+str(usrid))
             sendmsg(usrid, "Registration Unavailable.")
-    elif text == ("/help " + hname):
+    elif text == "/help":
         sendmsg(usrid, helptext)
     #priv commands
-    elif text == "/status all" and priv is True or text == ("/status "+hname) and priv is True:
+    elif text == "/status" and priv is True:
         stats = subprocess.getoutput("systemctl status downtime")
         sendmsg(usrid, stats)
-    elif text == ("/getupdates " + hname) and priv is True:
+    elif text == "/getupdates" and priv is True:
         sendmsg(usrid, "Searching for updates...")
         os.system("python3 /usr/bin/downtime/update-notf.py force &")
-    elif text == ("/doupdates " + hname) and priv is True:
+    elif text == "/doupdates" and priv is True:
         sendmsg(usrid, "Executing updates on " + hname)
         dlog.info("Executing updates as per command of user: " + str(usrid))
         os.system("apt upgrade -y &")
     elif "/restart" in text and priv is True:
         svstart = text.rsplit(' ')
-        if svstart[1] == hname and svstart[2]:
-            if svstart[2] == "downtime":
+        if svstart[1]:
+            if svstart[1] == "downtime":
                 sendmsg(usrid, "Downtime cannot restart itself.")
                 return 0
-            dlog.info(str(usrid) + " initiated restart of " + svstart[2] + ".")
-            sendmsg(usrid, "Attempting to start " + svstart[2])
-            cmd = "systemctl restart " + svstart[2]
+            dlog.info(str(usrid) + " initiated restart of " + svstart[1] + ".")
+            sendmsg(usrid, "Attempting to start " + svstart[1])
+            cmd = "systemctl restart " + svstart[1]
             os.system(cmd)
-            stats = subprocess.getoutput("systemctl is-active " + svstart[2])
+            stats = subprocess.getoutput("systemctl is-active " + svstart[1])
             if stats == "active":
                 dlog.info("Service restarted successfully")
-                sendmsg(usrid, svstart[2] + " start complete.")
+                sendmsg(usrid, svstart[1] + " start complete.")
             else:
                 dlog.warning("Service restart failed.")
-                sendmsg(usrid, svstart[2] + " start failed.")
+                sendmsg(usrid, svstart[1] + " start failed.")
     else:
-        if hname in text:
-            dlog.warning("User, " + str(usrid) + " attempted to access an unauthorized or unknown command.")
-            sendmsg(usrid, "You might not be allowed to access that command yet.")
+        dlog.warning("User, " + str(usrid) + " attempted to access an unauthorized or unknown command.")
+        sendmsg(usrid, "You might not be allowed to access that command yet.")
+            
 
 
 def parseMsg(message):

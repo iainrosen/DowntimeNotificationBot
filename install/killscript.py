@@ -10,7 +10,6 @@ def sendmsg(userid, message):
     try:
         token = dbget.readval("*", "api")
         bot = telepot.Bot(token)
-        message = hname + ": " + message
         bot.sendMessage(userid, message)
         dlog.info("Sent message: " + message + "to userid: " + str(userid))
         return 0
