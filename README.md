@@ -42,19 +42,17 @@ Downtime will confirm that the user is registered and the server will stop any o
 ## Available Commands
 ```/help``` Displays a link to this page
 
-```/register [hname]``` Attempts to register a user with the specified host
+```/register``` Attempts to register a user
 
-```/status [hname]``` Displays the status of the Downtime Service on a specified host
-
-```/status all``` Displays the status of the Downtime Service on all servers connected to the Telegram bot
+```/status``` Displays the status of the Downtime Service
 
 ```/ping``` Pings all servers connected to the bot
 
-```/getupdates [hname]``` Checks for updates on the specified host (Can take up to a minute)
+```/getupdates``` Checks for updates (Can take up to a minute)
 
-```/doupdates [hname]``` Runs updates on all available packages on a specified host
+```/doupdates``` Runs updates on all available packages on a specified host
 
-```/restart [hname] [service]``` Attempts to restart a failed service on a specified host
+```/restart [service]``` Attempts to restart a failed service
 
 ## A note about multi-server functionality
 The latest version of Downtime no longer supports multi-server functionality due to limitations with the telegram API.
