@@ -48,6 +48,7 @@ if force is True:
         sendmsg(usrid, "Updates Available for " + hname)
         sendmsg(usrid, updateslist)
     if updateslist != "" and upgrade is True:
+        usrid = dbget.readval("*", "authusers")
         upgradeverb = subprocess.getoutput("aptitude upgrade -y")
         sendmsg(usrid, "Completed Updates: ")
         sendmsg(usrid, upgradeverb)
