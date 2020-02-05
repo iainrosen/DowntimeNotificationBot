@@ -66,7 +66,7 @@ def process(usrid, text):
     elif text == "/doupdates" and priv is True:
         sendmsg(usrid, "Executing updates on " + hname)
         dlog.info("Executing updates as per command of user: " + str(usrid))
-        os.system("apt upgrade -y &")
+        os.system("python3 /usr/bin/downtime/update-notf.py upgrade &")
     elif "/restart" in text and priv is True:
         svstart = text.rsplit(' ')
         if svstart[1]:
