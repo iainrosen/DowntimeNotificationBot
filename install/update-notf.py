@@ -23,16 +23,16 @@ if sys.argv[1]:
         force = True
     if sys.argv[1] == "upgrade":
         upgrade = True
-while True:
+while force != True or upgrade != True:
     ctime = time.strftime("%H%M")
-    if str(ctime) == (dbget.readval("*", "timeint")) or force is True:
+    if str(ctime) == (dbget.readval("*", "timeint")):
         os.system("aptitude update")
         updateslist = subprocess.getoutput("aptitude search '~U'")
         if updateslist != "":
             usrid = dbget.readval("*", "authusers")
             sendmsg(usrid, "Updates Available for " + hname)
             sendmsg(usrid, updateslist)
-        if updateslist == "" and force is True:
+        if updateslist == "":
             usrid = dbget.readval("*", "authusers")
             sendmsg(usrid, "No Updates Available for " + hname)
         time.sleep(60)
