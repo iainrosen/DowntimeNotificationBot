@@ -24,7 +24,7 @@ if sys.argv[1]:
         force = True
     if sys.argv[1] == "upgrade":
         upgrade = True
-while climode = True:
+while climode == False:
     ctime = time.strftime("%H%M")
     if str(ctime) == (dbget.readval("*", "timeint")):
         os.system("aptitude update")
