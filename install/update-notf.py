@@ -44,10 +44,12 @@ while climode == False:
 if force is True or upgrade is True:
     os.system("aptitude update")
     updateslist = subprocess.getoutput("aptitude search '~U'")
-    if updateslist != "" and upgrade is False:
+    if updateslist != "" and force is True:
         usrid = dbget.readval("*", "authusers")
         sendmsg(usrid, "Updates Available for " + hname)
         sendmsg(usrid, updateslist)
+    if updateslist == "" and force is True:
+        sendmsg(usrid, "No updates available for " + hname)
     if upgrade is True:
         usrid = dbget.readval("*", "authusers")
         upgradeverb = subprocess.getoutput("aptitude upgrade -y")
