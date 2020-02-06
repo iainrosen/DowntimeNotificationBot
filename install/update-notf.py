@@ -18,6 +18,7 @@ force = False
 climode = False
 upgrade = False
 hname = socket.gethostname()
+usrid = dbget.readval("*", "authusers")
 if sys.argv[1]:
     climode = True
     if sys.argv[1] == "force":
@@ -45,7 +46,7 @@ if force is True or upgrade is True:
     os.system("aptitude update")
     updateslist = subprocess.getoutput("aptitude search '~U'")
     if updateslist != "" and force is True:
-        usrid = dbget.readval("*", "authusers")
+        
         sendmsg(usrid, "Updates Available for " + hname)
         sendmsg(usrid, updateslist)
     if updateslist == "" and force is True:
