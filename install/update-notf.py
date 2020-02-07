@@ -6,6 +6,7 @@ import dbget
 import socket
 import telepot
 import sqlite3
+
 def sendmsg(userid, message):
     try:
         token = dbget.readval("*", "api")
@@ -15,6 +16,7 @@ def sendmsg(userid, message):
     except:
         return 1
 def update():
+    hname = socket.gethostname()
     usrid = dbget.readval("*", "authusers")
     os.system("aptitude update")
     updateslist = subprocess.getoutput("aptitude search '~U'")
@@ -24,6 +26,7 @@ def update():
     else:
         sendmsg(usrid, "No updates available for " + hname)
 def upgrade():
+    hname = socket.gethostname()
     usrid = dbget.readval("*", "authusers")
     upgradeverb = subprocess.getoutput("aptitude upgrade -y")
     sendmsg(usrid, "Completed Updates: ")
