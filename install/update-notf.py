@@ -15,7 +15,7 @@ def sendmsg(userid, message):
         return 0
     except:
         return 1
-def update():
+def update(cron):
     hname = socket.gethostname()
     usrid = dbget.readval("*", "authusers")
     os.system("aptitude update")
@@ -23,7 +23,7 @@ def update():
     if updateslist != "":
         sendmsg(usrid, "Updates Available for " + hname)
         sendmsg(usrid, updateslist)
-    else:
+    if updateslist == "" and cron == False:
         sendmsg(usrid, "No updates available for " + hname)
 def upgrade():
     hname = socket.gethostname()
@@ -34,8 +34,10 @@ def upgrade():
 if sys.argv[1]:
     #cli mode
     if sys.argv[1] == "update":
-        update()
+        update(False)
     if sys.argv[1] == "upgrade":
         upgrade()
+    if sys.argv[1] == "cronupdate":
+        update(True)
 else:
     print("update-notf.py didn't recieve any command-line parameters")
