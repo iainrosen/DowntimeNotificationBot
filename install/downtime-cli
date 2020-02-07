@@ -5,6 +5,8 @@ import time
 import subprocess
 sys.path.append("/usr/bin/downtime/")
 import dbget
+if os.geteuid() != 0:
+    exit("Downtime CLI Requires Root Permissions.")
 def register():
     print("Ready to Register.")
     os.system("touch /tmp/registration.downtime.lock")
