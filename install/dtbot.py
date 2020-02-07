@@ -5,6 +5,7 @@ import dbget
 import socket
 import subprocess
 import dlog
+versionid = "0.1.1"
 dlog.info("Starting DowntimeBot...")
 token = dbget.readval("*", "api")
 bot = telepot.Bot(token)
@@ -62,7 +63,7 @@ def process(usrid, text):
         sendmsg(usrid, stats)
     elif text == "/getupdates" and priv is True:
         sendmsg(usrid, "Searching for updates...")
-        os.system("python3 /usr/bin/downtime/update-notf.py force &")
+        os.system("python3 /usr/bin/downtime/update-notf.py update &")
     elif text == "/doupdates" and priv is True:
         sendmsg(usrid, "Executing updates on " + hname)
         dlog.info("Executing updates as per command of user: " + str(usrid))
@@ -111,7 +112,7 @@ def parseMsg(message):
 
 
 userid = dbget.readval("*", "authusers")
-msg = "Downtime on " + hname + " is starting by systemd."
+msg = "Downtime on " + hname + " started. Version " + versionid
 sendmsg(userid, msg)
 while True:
     try:

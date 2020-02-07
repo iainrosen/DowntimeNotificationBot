@@ -14,45 +14,25 @@ def sendmsg(userid, message):
         return 0
     except:
         return 1
-force = False
-climode = False
-upgrade = False
-hname = socket.gethostname()
-usrid = dbget.readval("*", "authusers")
-if sys.argv[1]:
-    climode = True
-    if sys.argv[1] == "force":
-        force = True
-    if sys.argv[1] == "upgrade":
-        upgrade = True
-while climode == False:
-    ctime = time.strftime("%H%M")
-    if str(ctime) == (dbget.readval("*", "timeint")):
-        os.system("aptitude update")
-        updateslist = subprocess.getoutput("aptitude search '~U'")
-        if updateslist != "":
-            usrid = dbget.readval("*", "authusers")
-            sendmsg(usrid, "Updates Available for " + hname)
-            sendmsg(usrid, updateslist)
-        if updateslist == "":
-            usrid = dbget.readval("*", "authusers")
-            sendmsg(usrid, "No Updates Available for " + hname)
-        time.sleep(60)
-        if force is True:
-            break
-    else:
-        time.sleep(30)
-if force is True or upgrade is True:
+def update():
+    usrid = dbget.readval("*", "authusers")
     os.system("aptitude update")
     updateslist = subprocess.getoutput("aptitude search '~U'")
-    if updateslist != "" and force is True:
-        
+    if updateslist != "":
         sendmsg(usrid, "Updates Available for " + hname)
         sendmsg(usrid, updateslist)
-    if updateslist == "" and force is True:
+    else:
         sendmsg(usrid, "No updates available for " + hname)
-    if upgrade is True:
-        usrid = dbget.readval("*", "authusers")
-        upgradeverb = subprocess.getoutput("aptitude upgrade -y")
-        sendmsg(usrid, "Completed Updates: ")
-        sendmsg(usrid, upgradeverb)
+def upgrade():
+    usrid = dbget.readval("*", "authusers")
+    upgradeverb = subprocess.getoutput("aptitude upgrade -y")
+    sendmsg(usrid, "Completed Updates: ")
+    sendmsg(usrid, upgradeverb)
+if sys.argv[1]:
+    #cli mode
+    if sys.argv[1] == "update":
+        update()
+    if sys.argv[1] == "upgrade":
+        upgrade()
+else:
+    print("update-notf.py didn't recieve any command-line parameters")
