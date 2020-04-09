@@ -35,9 +35,9 @@ if sys.argv[1]:
     #cli mode
     if sys.argv[1] == "update":
         update(False)
-    if sys.argv[1] == "upgrade":
+    elif sys.argv[1] == "upgrade":
         upgrade()
-    if sys.argv[1] == "cronupdate":
+    elif sys.argv[1] == "cronupdate":
         update(True)
 else:
     print("update-notf.py didn't recieve any command-line parameters")
